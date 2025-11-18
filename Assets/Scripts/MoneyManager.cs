@@ -10,7 +10,6 @@ public class MoneyManager : MonoBehaviour
     [Header("Income Settings")]
     [SerializeField] TMP_Text displayMoney;
     public float addedMoney = 1f;
-    public float deacreasedMoney;
     public float currentMoney = 0;
     public enum MoneyState{MoneyAdded, MoneyDecreased};
     public MoneyState currentState;
