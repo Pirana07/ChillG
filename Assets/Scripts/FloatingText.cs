@@ -1,15 +1,16 @@
 using UnityEngine;
 using TMPro;
-using UnityEditor.ShaderGraph;
 
 public class FloatingText : MonoBehaviour
 {
     [SerializeField] private GameObject text;
+    [SerializeField] private GameObject text2;
     [SerializeField] private float seconds = 0.9f;
     [SerializeField] TMP_Text displayMoney;
+    [SerializeField] TMP_Text textdecrease;
+
     [SerializeField] MoneyManager moneyManager;
 
- 
     float timePassed;
 
     private void Update()
@@ -22,11 +23,11 @@ public class FloatingText : MonoBehaviour
             text.SetActive(true);
             timePassed = 0f;
         }
-        else if (timePassed > 0.45f)
+        else if (timePassed > 0.45f )
         {
             text.SetActive(false);
+            text2.SetActive(false);
         }
-
     }
     
     void MoneyText()
@@ -39,10 +40,10 @@ public class FloatingText : MonoBehaviour
                     break;
 
                 case MoneyManager.MoneyState.MoneyDecreased:
-                    displayMoney.text = "-5$";
-                    displayMoney.color = Color.red;
+                    text2.SetActive(true);
+                    textdecrease.text = "-" + moneyManager.deacreasedMoney.ToString() + "$";
+                    textdecrease.color = Color.red;
                     break;
             }
     }
-    
 }
