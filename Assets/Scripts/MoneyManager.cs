@@ -14,7 +14,8 @@ public class MoneyManager : MonoBehaviour
     public float currentMoney = 0;
     public enum MoneyState{MoneyAdded, MoneyDecreased};
     public MoneyState currentState;
-   
+   public float combinedDecrease = 0f;
+
    
  private void Update() {
     timePassed += Time.deltaTime;

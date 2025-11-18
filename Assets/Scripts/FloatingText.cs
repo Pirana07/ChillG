@@ -26,7 +26,6 @@ public class FloatingText : MonoBehaviour
         else if (timePassed > 0.45f )
         {
             text.SetActive(false);
-            text2.SetActive(false);
         }
     }
     
@@ -35,15 +34,18 @@ public class FloatingText : MonoBehaviour
          switch (moneyManager.currentState)
             {
                 case MoneyManager.MoneyState.MoneyAdded:
+                    text2.SetActive(false);
                     displayMoney.text = "+" + moneyManager.addedMoney.ToString() + "$";
                     displayMoney.color = Color.green;
                     break;
 
                 case MoneyManager.MoneyState.MoneyDecreased:
                     text2.SetActive(true);
-                    textdecrease.text = "-" + moneyManager.deacreasedMoney.ToString() + "$";
+                    textdecrease.text = "-" + moneyManager.combinedDecrease + "$";
                     textdecrease.color = Color.red;
-                    break;
+
+                    moneyManager.combinedDecrease = 0f;
+                break;
             }
     }
 }

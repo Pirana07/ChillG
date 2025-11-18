@@ -52,6 +52,7 @@ public class UpgradeButton : MonoBehaviour
         {
             moneyManager.deacreasedMoney = cost;
             moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased;
+            moneyManager.combinedDecrease += cost;
             moneyManager.currentMoney -= cost;
             moneyManager.addedMoney = upgradedmoney; 
             CancelInvoke(nameof(ResetMoneyState));
