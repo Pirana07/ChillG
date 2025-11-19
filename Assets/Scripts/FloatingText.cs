@@ -35,16 +35,16 @@ public class FloatingText : MonoBehaviour
             {
                 case MoneyManager.MoneyState.MoneyAdded:
                     text2.SetActive(false);
-                    displayMoney.text = "+" + moneyManager.addedMoney.ToString() + "$";
+                    moneyManager.UpdateCookieText(moneyManager.addedMoney, displayMoney, "+");
                     displayMoney.color = Color.green;
                     break;
 
                 case MoneyManager.MoneyState.MoneyDecreased:
                     text2.SetActive(true);
-                    textdecrease.text = "-" + moneyManager.combinedDecrease + "$";
+                    moneyManager.UpdateCookieText(moneyManager.finalCost, textdecrease, "-");
                     textdecrease.color = Color.red;
 
-                    moneyManager.combinedDecrease = 0f;
+                    moneyManager.finalCost = 0;
                 break;
             }
     }

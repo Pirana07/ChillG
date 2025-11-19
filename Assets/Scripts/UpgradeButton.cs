@@ -38,9 +38,9 @@ public class UpgradeButton : MonoBehaviour
 
         switch (x)
         {
-            case 1: BuyUpgrade(25, 0, 1f, 1, ref i); break;
-            case 2: BuyUpgrade(1000, 1, 45f, 2, ref j); break;
-            case 3: BuyUpgrade(50000, 2, 750f, 3, ref k); ;break;
+            case 1: BuyUpgrade(25, 0, 1f, ref i); break;
+            case 2: BuyUpgrade(1000, 1, 45f, ref j); break;
+            case 3: BuyUpgrade(50000, 2, 750f,ref k); ;break;
         }
         
 
@@ -50,30 +50,31 @@ public class UpgradeButton : MonoBehaviour
     }
     
 
-    void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, int priceincirse, ref int counter)
+void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
+{
+     moneyManager.finalCost = cost + counter;
+
+    if (moneyManager.currentMoney >= moneyManager.finalCost)
     {
-        if (moneyManager.currentMoney >= cost + counter)
-        {
-            moneyManager.combinedDecrease += cost + counter;
-            counter += cost;
-            
-            moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased;
-            moneyManager.currentMoney -= moneyManager.combinedDecrease;
-            moneyManager.addedMoney += upgradedmoney; 
+        moneyManager.currentMoney -= moneyManager.finalCost;
+        counter += cost;
 
-            CancelInvoke(nameof(ResetMoneyState));
-            Invoke(nameof(ResetMoneyState), stateDuration);
+        moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased;
+        CancelInvoke(nameof(ResetMoneyState));
+        Invoke(nameof(ResetMoneyState), stateDuration);
 
-            cotText[0].text = "Cost: " + (25 + i) + "$";      
-            cotText[1].text = "Cost: " + (1000 + j) + "$";   
-            cotText[2].text = "Cost: " + (50000 + k) + "$";   
+        moneyManager.addedMoney += upgradedmoney;
 
-        }
-        else
-        {
-            buttonText[buttonIndex].text = "Not enough money!";
-            resetTimers[buttonIndex] = 1f; 
-        }
+        cotText[0].text = "Cost: " + (25 + i) + "$";
+        cotText[1].text = "Cost: " + (1000 + j) + "$";
+        cotText[2].text = "Cost: " + (50000 + k) + "$";
     }
+    else
+    {
+        buttonText[buttonIndex].text = "Not enough money!";
+        resetTimers[buttonIndex] = 1f;
+    }
+}
+
 
 }

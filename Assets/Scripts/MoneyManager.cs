@@ -13,7 +13,7 @@ public class MoneyManager : MonoBehaviour
     public float currentMoney = 0;
     public enum MoneyState{MoneyAdded, MoneyDecreased};
     public MoneyState currentState;
-   public float combinedDecrease = 0f;
+   public  int finalCost = 0;
 
    
  private void Update() {
@@ -25,7 +25,27 @@ public class MoneyManager : MonoBehaviour
         timePassed = 0f;
         }
     
-        displayMoney.text = "$" + currentMoney.ToString();
+        UpdateCookieText(currentMoney, displayMoney);
 
     }
+
+     public void UpdateCookieText(double moneyCount, TMP_Text textToChange, string endText = "")
+    {
+        string[] suffixes = { "", "K", "M", "B", "T", "Q" };
+        int index = 0;
+
+        while (moneyCount >= 1000 && index < suffixes.Length - 1)
+        {
+            moneyCount /= 1000;
+            index++;
+        }
+
+        string formatted =
+            index == 0
+            ? moneyCount.ToString()
+            : moneyCount.ToString("F1") + suffixes[index];
+
+        textToChange.text = endText + formatted + "$";
+    }
+
 }

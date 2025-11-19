@@ -155,7 +155,7 @@ MonoBehaviour:
   addedMoney: 1
   currentMoney: 0
   currentState: 0
-  combinedDecrease: 0
+  finalCost: 0
 --- !u!4 &55012518
 Transform:
   m_ObjectHideFlags: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   textaddedtmp: {fileID: 1387761498}
   animcoin: {fileID: 1205434307}
   coinParticles: {fileID: 698713501}
+  mainCanvas: {fileID: 788703853}
 --- !u!1 &180930537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
@@ -6248,7 +6249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_Pivot.x
@@ -6312,7 +6313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -87
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7516,7 +7517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_Pivot.x
@@ -7580,11 +7581,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -318.4
+      value: -84
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -126.6
+      value: -260
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

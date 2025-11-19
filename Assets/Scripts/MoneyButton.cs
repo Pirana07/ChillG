@@ -5,10 +5,12 @@ public class MoneyButton : MonoBehaviour
 {
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] GameObject AddedText;
+    // [SerializeField] GameObject mouseAddedText;
     [SerializeField] TMP_Text textaddedtmp;
     [SerializeField] Animator animcoin;
     [SerializeField] ParticleSystem coinParticles;
-
+    [SerializeField] private Canvas mainCanvas;
+    
     float combineadded;
 
     void Start()
@@ -16,6 +18,7 @@ public class MoneyButton : MonoBehaviour
     }
     public void OnclickCoin(float moneyadded)
     {
+        // Instantiate(mouseAddedText, Input.mousePosition, Quaternion.identity, mainCanvas.transform);
         moneyManager.currentMoney += moneyadded;
         combineadded += moneyadded;
         animcoin.SetTrigger("PlayCoin");
