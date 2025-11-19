@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6340987768383014837}
   - component: {fileID: 7070230681531402431}
+  - component: {fileID: 3853578174118846510}
   m_Layer: 5
   m_Name: FloatingTextParnet
   m_TagString: Untagged
@@ -59,6 +60,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3853578174118846510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164131577773734510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f82668382cc6e46a48934e4bc058e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0.2
 --- !u!1001 &2476370762900043792
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -131,8 +131,9 @@ GameObject:
   - component: {fileID: 55012517}
   - component: {fileID: 55012519}
   - component: {fileID: 55012520}
+  - component: {fileID: 55012521}
   m_Layer: 0
-  m_Name: MoneyManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,11 +210,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyManager: {fileID: 55012517}
-  AddedText: {fileID: 1387761496}
+  CombinedAddedText: {fileID: 63420478}
+  CombinedAddedTextAnimator: {fileID: 0}
+  mouseAddedText: {fileID: 3164131577773734510, guid: a8214999d33b63e429d3355871b96fa1, type: 3}
   textaddedtmp: {fileID: 1387761498}
   animcoin: {fileID: 1205434307}
   coinParticles: {fileID: 698713501}
   mainCanvas: {fileID: 788703853}
+--- !u!114 &55012521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55012516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8b85ac93d168c4d88cc442bb2fbf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &63420478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 63420479}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &63420479
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63420478}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.7578533, y: 1.7578533, z: 1.7578533}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1387761497}
+  m_Father: {fileID: 788703854}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 812, y: 256.09998}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &180930537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
@@ -269,7 +320,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 28.3, y: 21.7}
+  m_AnchoredPosition: {x: 30, y: 21.7}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191003637
@@ -292,7 +343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Upgrades: +1$'
+  m_text: 'Upgrades: +1$/s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -918,7 +969,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -45.739563, y: 21.181313}
+  m_AnchoredPosition: {x: -49.1, y: 21.181313}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642259269
@@ -5953,7 +6004,7 @@ RectTransform:
   - {fileID: 917094067}
   - {fileID: 212039144}
   - {fileID: 1205434303}
-  - {fileID: 1387761497}
+  - {fileID: 63420479}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6018,7 +6069,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade 3
+  m_text: Upgrade Coin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6538,7 +6589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 34.2, y: 22.653252}
+  m_AnchoredPosition: {x: 35.2, y: 22.653252}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1067091382
@@ -6561,7 +6612,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Upgrades: +750$'
+  m_text: 'Upgrades: +50$/s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6781,7 +6832,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 788703854}
+    m_TransformParent: {fileID: 63420479}
     m_Modifications:
     - target: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_Name
@@ -6789,7 +6840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_Pivot.x
@@ -6825,15 +6876,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.7578533
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.7578533
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7578533
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6849,27 +6900,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99941826
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.034105822
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 812
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 256.09998
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6881,7 +6932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 3.909
       objectReference: {fileID: 0}
     - target: {fileID: 9182241892784063183, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
       propertyPath: m_text
@@ -7132,7 +7183,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade 1
+  m_text: 'Buy Miner(max: 43)
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7211,11 +7264,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352341829}
   m_CullTransparentMesh: 1
---- !u!1 &1387761496 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3625669356204344870, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
-  m_PrefabInstance: {fileID: 1204361022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1387761497 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7759279930757574728, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
@@ -7226,7 +7274,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9182241892784063183, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
   m_PrefabInstance: {fileID: 1204361022}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1387761496}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -7424,7 +7472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade 2
+  m_text: Click Upgrade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7663,14 +7711,14 @@ RectTransform:
   m_GameObject: {fileID: 1847819860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.46032974, y: 0.46032974, z: 0.46032974}
+  m_LocalScale: {x: 0.43998316, y: 0.43998316, z: 0.43998316}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1901538763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 29.699951, y: 21.281342}
+  m_AnchoredPosition: {x: 33.1, y: 21.281342}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1847819862
@@ -7693,7 +7741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Upgrades: +45$'
+  m_text: 'Upgrades: +1$/click'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
