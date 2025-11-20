@@ -6,6 +6,8 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] TMP_Text[] buttonText;
     [SerializeField] TMP_Text[] cotText;
+    [SerializeField] GameObject[] pickaxeArray;
+
 
     [SerializeField] string[] TextButton;
 
@@ -65,6 +67,7 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
 
         moneyManager.addedMoney += upgradedmoney;
 
+        pickaxeArray[i/25].SetActive(true);
         cotText[0].text = "Cost: " + (25 + i) + "$";
         cotText[1].text = "Cost: " + (1000 + j) + "$";
         cotText[2].text = "Cost: " + (50000 + k) + "$";
