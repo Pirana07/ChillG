@@ -165,14 +165,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9182241892784063183, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
-      propertyPath: m_margin.w
-      value: 31.708017
-      objectReference: {fileID: 0}
-    - target: {fileID: 9182241892784063183, guid: 18189c14e0b7cb84f8eb001f9003382d, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4281413937
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

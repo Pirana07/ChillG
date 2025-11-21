@@ -6,27 +6,26 @@ public class MoneyButton : MonoBehaviour
 {
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] GameObject CombinedAddedText;
-    [SerializeField] Animator CombinedAddedTextAnimator;
-
     [SerializeField] GameObject mouseAddedText;
-    [SerializeField] TMP_Text textaddedtmp;
+    [SerializeField] TMP_Text Combinetextaddedtmp;
+
     [SerializeField] Animator animcoin;
     [SerializeField] ParticleSystem coinParticles;
     [SerializeField] private Canvas mainCanvas;
-    
+    public float onClickMoneyAdded = 1f;
     float combineadded;
 
     void Start()
     {
     }
-    public void OnclickCoin(float moneyadded)
+    public void OnclickCoin()
     {
-        GameObject spawnedText = ObjectPoolManager.SpawnObject(mouseAddedText, mainCanvas.transform);
-        spawnedText.transform.position = Input.mousePosition;
+        SpawnAtMouse(mouseAddedText);
 
-        moneyManager.currentMoney += moneyadded;
-        combineadded += moneyadded;
-        textaddedtmp.text = "+" + combineadded.ToString() + "$";
+
+        moneyManager.currentMoney += onClickMoneyAdded;
+        combineadded += onClickMoneyAdded;
+        Combinetextaddedtmp.text = "+" + combineadded.ToString() + "$";
 
         CombineAddedColor();
         CombinedAddedText.SetActive(true);
@@ -48,16 +47,24 @@ public class MoneyButton : MonoBehaviour
         void CombineAddedColor(){
         switch (combineadded)
         {
-            case 1: textaddedtmp.color = Color.green;break;
-            case 10:textaddedtmp.color = Color.yellow;break;
-            case 30:textaddedtmp.color = new Color(1f, 0.5f, 0f);break; //orange
-            case 50:textaddedtmp.color = Color.red;break;
-            case 100:textaddedtmp.color = Color.magenta; break;
-            case 500:textaddedtmp.color = Color.blue; break;
-            case 999:textaddedtmp.color = Color.black;break;
+            case 1: Combinetextaddedtmp.color = Color.green;break;
+            case 10:Combinetextaddedtmp.color = Color.yellow;break;
+            case 30:Combinetextaddedtmp.color = new Color(1f, 0.5f, 0f);break; //orange
+            case 50:Combinetextaddedtmp.color = Color.red;break;
+            case 100:Combinetextaddedtmp.color = Color.magenta; break;
+            case 500:Combinetextaddedtmp.color = Color.blue; break;
+            case 999:Combinetextaddedtmp.color = Color.black;break;
 
         }
      }   
     
+    void SpawnAtMouse(GameObject prefab)
+    {
+      GameObject obj = ObjectPoolManager.SpawnObject(prefab, mainCanvas.transform);
+      Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      pos.z = 0f;
 
+     obj.transform.position = pos;    
+    }
+    
 }

@@ -41,8 +41,11 @@ public class UpgradeButton : MonoBehaviour
         switch (x)
         {
             case 1: BuyUpgrade(25, 0, 1f, ref i); break;
-            case 2: BuyUpgrade(1000, 1, 45f, ref j); break;
-            case 3: BuyUpgrade(50000, 2, 750f,ref k); ;break;
+            case 2:
+                BuyUpgrade(1000, 1, 0f, ref j);
+                moneyManager.moneyButton.onClickMoneyAdded += 1f; 
+            break;
+            case 3: BuyUpgrade(50000, 2, 750f,ref k); break;
         }
         
 
