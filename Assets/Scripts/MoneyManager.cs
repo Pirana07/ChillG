@@ -25,11 +25,11 @@ public class MoneyManager : MonoBehaviour
         timePassed = 0f;
         }
     
-        UpdateCookieText(currentMoney, displayMoney);
+        UpdateGoldText(currentMoney, displayMoney);
 
     }
 
-     public void UpdateCookieText(double moneyCount, TMP_Text textToChange, string endText = "")
+     public void UpdateGoldText(double moneyCount, TMP_Text textToChange, string endText = "")
     {
         string[] suffixes = { "", "K", "M", "B", "T", "Q" };
         int index = 0;

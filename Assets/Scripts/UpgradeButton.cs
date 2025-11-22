@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -7,6 +9,10 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] TMP_Text[] buttonText;
     [SerializeField] TMP_Text[] cotText;
     [SerializeField] GameObject[] pickaxeArray;
+    [SerializeField] Sprite[] coinSprites;
+    [SerializeField] Button buttonCoinSprite;
+
+
 
 
     [SerializeField] string[] TextButton;
@@ -45,7 +51,7 @@ public class UpgradeButton : MonoBehaviour
                 BuyUpgrade(1000, 1, 0f, ref j);
                 moneyManager.moneyButton.onClickMoneyAdded += 1f; 
             break;
-            case 3: BuyUpgrade(50000, 2, 750f,ref k); break;
+            case 3: BuyUpgrade(10, 2, 750f,ref k); break;
         }
         
 
@@ -71,6 +77,8 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         moneyManager.addedMoney += upgradedmoney;
 
         pickaxeArray[i/25].SetActive(true);
+        buttonCoinSprite.image.sprite = coinSprites[k/10];
+
         cotText[0].text = "Cost: " + (25 + i) + "$";
         cotText[1].text = "Cost: " + (1000 + j) + "$";
         cotText[2].text = "Cost: " + (50000 + k) + "$";

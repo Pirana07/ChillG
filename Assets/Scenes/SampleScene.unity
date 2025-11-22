@@ -216,10 +216,19 @@ MonoBehaviour:
   - {fileID: 2082631408}
   - {fileID: 794173830}
   - {fileID: 197516556}
+  coinSprites:
+  - {fileID: -1057947443088451679, guid: 3842a77467938f247b68a0b4314db359, type: 3}
+  - {fileID: 497027269284114030, guid: 6570c540b94a30a47ba9dafdba847acb, type: 3}
+  - {fileID: -3337038689812066966, guid: 3cd853991d47d7f449ce11f39795728b, type: 3}
+  - {fileID: -323074977526429526, guid: 452abce1f66da4046857bfba0d34bdb5, type: 3}
+  - {fileID: -7920495790330307924, guid: 6c58a6e504ba01d48be78628fca0678f, type: 3}
+  - {fileID: -666877157653769168, guid: 27502fa6d0a01d24d9da95175cdbd737, type: 3}
+  - {fileID: 6155762778436064537, guid: e1002831a5249b84daa1ca0f18e9b254, type: 3}
+  buttonCoinSprite: {fileID: 1205434304}
   TextButton:
-  - Upgrade 1
-  - Upgrade 2
-  - Upgrade 3
+  - Buy Pickaxe
+  - Upgrade Click
+  - Upgrade Coin
 --- !u!114 &55012520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12882,7 +12891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3337038689812066966, guid: 3cd853991d47d7f449ce11f39795728b, type: 3}
+  m_Sprite: {fileID: -1057947443088451679, guid: 3842a77467938f247b68a0b4314db359, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

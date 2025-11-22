@@ -35,13 +35,13 @@ public class FloatingText : MonoBehaviour
             {
                 case MoneyManager.MoneyState.MoneyAdded:
                     text2.SetActive(false);
-                    moneyManager.UpdateCookieText(moneyManager.addedMoney, displayMoney, "+");
+                    moneyManager.UpdateGoldText(moneyManager.addedMoney, displayMoney, "+");
                     displayMoney.color = Color.green;
                     break;
 
                 case MoneyManager.MoneyState.MoneyDecreased:
                     text2.SetActive(true);
-                    moneyManager.UpdateCookieText(moneyManager.finalCost, textdecrease, "-");
+                    moneyManager.UpdateGoldText(moneyManager.finalCost, textdecrease, "-");
                     textdecrease.color = Color.red;
 
                     moneyManager.finalCost = 0;
