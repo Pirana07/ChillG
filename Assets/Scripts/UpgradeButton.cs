@@ -76,9 +76,12 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
 
         moneyManager.addedMoney += upgradedmoney;
 
+        if(i/25 < 21){
         pickaxeArray[i/25].SetActive(true);
+        }
+        if(k/10 < 7){
         buttonCoinSprite.image.sprite = coinSprites[k/10];
-
+        }
         cotText[0].text = "Cost: " + (25 + i) + "$";
         cotText[1].text = "Cost: " + (1000 + j) + "$";
         cotText[2].text = "Cost: " + (50000 + k) + "$";
