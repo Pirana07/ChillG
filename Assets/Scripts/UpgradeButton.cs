@@ -1,7 +1,6 @@
 using UnityEngine;
-using TMPro;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -11,9 +10,6 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] GameObject[] pickaxeArray;
     [SerializeField] Sprite[] coinSprites;
     [SerializeField] Button buttonCoinSprite;
-
-
-
 
     [SerializeField] string[] TextButton;
 
@@ -43,23 +39,16 @@ public class UpgradeButton : MonoBehaviour
 
     public void Upgrade(int x)
     {
-
         switch (x)
         {
             case 1: BuyUpgrade(25, 0, 1f, ref i); break;
-            case 2:
-                BuyUpgrade(1000, 1, 0f, ref j);
-                moneyManager.moneyButton.onClickMoneyAdded += 1f; 
-            break;
-            case 3: BuyUpgrade(10, 2, 750f,ref k); break;
+            case 2: BuyUpgrade(500, 1, 0f, ref j); break;
+            case 3: BuyUpgrade(25000, 2, 150f,ref k); break;
         }
-        
-
     }
     void ResetMoneyState(){
         moneyManager.currentState = MoneyManager.MoneyState.MoneyAdded;
     }
-    
 
 void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
 {
@@ -76,15 +65,18 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
 
         moneyManager.addedMoney += upgradedmoney;
 
-        if(i/25 < 21){
+        if(i/25 < 21)
         pickaxeArray[i/25].SetActive(true);
-        }
-        if(k/10 < 7){
-        buttonCoinSprite.image.sprite = coinSprites[k/10];
-        }
+        
+        if(k/25000 < 7)
+        buttonCoinSprite.image.sprite = coinSprites[k/25000];
+        
+        if (buttonIndex == 1)
+        moneyManager.moneyButton.onClickMoneyAdded += 1f;
+       
         cotText[0].text = "Cost: " + (25 + i) + "$";
-        cotText[1].text = "Cost: " + (1000 + j) + "$";
-        cotText[2].text = "Cost: " + (50000 + k) + "$";
+        cotText[1].text = "Cost: " + (500 + j) + "$";
+        cotText[2].text = "Cost: " + (25000 + k) + "$";
     }
     else
     {
@@ -92,6 +84,5 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         resetTimers[buttonIndex] = 1f;
     }
 }
-
 
 }
