@@ -42,8 +42,8 @@ public class UpgradeButton : MonoBehaviour
         switch (x)
         {
             case 1: BuyUpgrade(25, 0, 1f, ref i); break;
-            case 2: BuyUpgrade(500, 1, 0f, ref j); break;
-            case 3: BuyUpgrade(25000, 2, 150f,ref k); break;
+            case 2: BuyUpgrade(200, 1, 0f, ref j); break;
+            case 3: BuyUpgrade(20000, 2, 150f,ref k); break;
         }
     }
     void ResetMoneyState(){
@@ -68,15 +68,15 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         if(i/25 < 21)
         pickaxeArray[i/25].SetActive(true);
         
-        if(k/25000 < 7)
-        buttonCoinSprite.image.sprite = coinSprites[k/25000];
+        if(k/20000 < 7)
+        buttonCoinSprite.image.sprite = coinSprites[k/20000];
         
         if (buttonIndex == 1)
         moneyManager.moneyButton.onClickMoneyAdded += 1f;
        
         cotText[0].text = "Cost: " + (25 + i) + "$";
-        cotText[1].text = "Cost: " + (500 + j) + "$";
-        cotText[2].text = "Cost: " + (25000 + k) + "$";
+        cotText[1].text = "Cost: " + (200 + j) + "$";
+        cotText[2].text = "Cost: " + (20000 + k) + "$";
     }
     else
     {
