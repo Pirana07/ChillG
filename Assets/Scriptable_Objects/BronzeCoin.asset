@@ -17,3 +17,5 @@ MonoBehaviour:
   artWork: {fileID: -1057947443088451679, guid: 3842a77467938f247b68a0b4314db359, type: 3}
   Income: 2
   Cost: 20000
+  rarity: common
+  chances: 100%
