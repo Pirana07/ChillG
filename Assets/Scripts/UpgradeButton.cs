@@ -6,15 +6,25 @@ public class UpgradeButton : MonoBehaviour
 {
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] TMP_Text[] buttonText;
-    [SerializeField] TMP_Text[] cotText;
+    [SerializeField] TMP_Text[] costText;
     [SerializeField] GameObject[] pickaxeArray;
     [SerializeField] Sprite[] coinSprites;
     [SerializeField] Button buttonCoinSprite;
+    [SerializeField] SpawnMan spawnManScript;
+
 
     [SerializeField] string[] TextButton;
 
     float stateDuration = 1f;
     float[] resetTimers;
+
+    public enum UpgradeButtonType
+    {
+        CoinUpgrade, 
+        ManSpawner,
+        ClickUpgrade
+    }
+    
         int i = 0;
         int j = 0;
         int k = 0;
@@ -37,15 +47,17 @@ public class UpgradeButton : MonoBehaviour
         }
     }
 
-    public void Upgrade(int x)
+    public void Upgrade(int index)
     {
-        switch (x)
+        UpgradeButtonType buttonTypeIndex = (UpgradeButtonType)index;
+        switch (buttonTypeIndex)
         {
-            case 1: BuyUpgrade(25, 0, 1f, ref i); break;
-            case 2: BuyUpgrade(200, 1, 0f, ref j); break;
-            case 3: BuyUpgrade(20000, 2, 150f,ref k); break;
+            case UpgradeButtonType.ManSpawner: BuyUpgrade(25, 0, 1f, ref i); break;
+            case UpgradeButtonType.CoinUpgrade: BuyUpgrade(200, 1, 10f, ref j); break;
+            case UpgradeButtonType.ClickUpgrade: BuyUpgrade(20000, 2, 150f,ref k); break;
         }
     }
+
     void ResetMoneyState(){
         moneyManager.currentState = MoneyManager.MoneyState.MoneyAdded;
     }
@@ -65,8 +77,10 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
 
         moneyManager.addedMoney += upgradedmoney;
 
-        if(i/25 < 21)
-        pickaxeArray[i/25].SetActive(true);
+        // if(i/25 < 21)
+        // pickaxeArray[i/25].SetActive(true);
+        spawnManScript.OnClickMinerButton();
+
         
         if(k/20000 < 7)
         buttonCoinSprite.image.sprite = coinSprites[k/20000];
@@ -74,14 +88,19 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         if (buttonIndex == 1)
         moneyManager.moneyButton.onClickMoneyAdded += 1f;
        
-        cotText[0].text = "Cost: " + (25 + i) + "$";
-        cotText[1].text = "Cost: " + (200 + j) + "$";
-        cotText[2].text = "Cost: " + (20000 + k) + "$";
+        // costText[0].text = "Cost: " + (25 + i) + "$";
+        // costText[1].text = "Cost: " + (200 + j) + "$";
+        // costText[2].text = "Cost: " + (20000 + k) + "$";
     }
     else
     {
-        buttonText[buttonIndex].text = "Not enough money!";
-        resetTimers[buttonIndex] = 1f;
+       
+        if(buttonIndex == 0)
+            Debug.Log("nope");
+        else{
+            buttonText[buttonIndex].text = "Not enough money!";
+            resetTimers[buttonIndex] = 1f; 
+        }
     }
 }
 
