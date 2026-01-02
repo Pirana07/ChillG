@@ -18,21 +18,18 @@ public class UpgradeButton : MonoBehaviour
 
     // [SerializeField] TMP_Text[] upgradeButtonCostText;
     // [SerializeField] GameObject[] pickaxeArray;
-
+    [Header("UpgradeType Settings")]
     float stateDuration = 1f;
+    int i = 0;
+    int j = 0;
+    int k = 0;
     float[] resetTimers;
-
-    public enum UpgradeButtonType
+     public enum UpgradeButtonType
     {
         CoinUpgrade, 
         ManSpawner,
         ClickUpgrade
     }
-    
-        int i = 0;
-        int j = 0;
-        int k = 0;
-
    void Awake()
     {
         resetTimers = new float[3]; 
@@ -50,7 +47,6 @@ public class UpgradeButton : MonoBehaviour
             }
         }
     }
-
     public void Upgrade(int index)
     {
         UpgradeButtonType buttonTypeIndex = (UpgradeButtonType)index;
@@ -61,11 +57,10 @@ public class UpgradeButton : MonoBehaviour
             case UpgradeButtonType.ClickUpgrade: BuyUpgrade(20000, 2, 150f,ref k); break;
         }
     }
-
     void ResetMoneyState(){
         moneyManager.currentState = MoneyManager.MoneyState.MoneyAdded;
     }
-
+    
 void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
 {
      moneyManager.finalCost = cost + counter;
@@ -80,18 +75,15 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         Invoke(nameof(ResetMoneyState), stateDuration);
 
         moneyManager.addedMoney += upgradedmoney;
-
-        // if(i/25 < 21)
-        // pickaxeArray[i/25].SetActive(true);
         spawnManScript.OnClickMinerButton();
-
         
         if(k/20000 < 7)
         buttonCoinSprite.image.sprite = coinSprites[k/20000];
         
         if (buttonIndex == 1)
         moneyManager.moneyButton.onClickMoneyAddedText += 1f;
-       
+        // if(i/25 < 21)
+        // pickaxeArray[i/25].SetActive(true);
         // costText[0].text = "Cost: " + (25 + i) + "$";
         // costText[1].text = "Cost: " + (200 + j) + "$";
         // costText[2].text = "Cost: " + (20000 + k) + "$";

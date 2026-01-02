@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 public class MoneyManager : MonoBehaviour
 {
     [Header("Time Settings")]
-    [SerializeField] float seconds = 1f;
+    [Range(0f, 2f)][SerializeField] float seconds = 1f;
     float timePassed = 0f;
 
     [Header("Income Settings")]
@@ -18,7 +18,7 @@ public class MoneyManager : MonoBehaviour
     public int finalCost = 0;
 
     [Header("IncomeState")]
-     public MoneyState currentState; 
+    public MoneyState currentState; 
     public enum MoneyState{MoneyAdded, MoneyDecreased};
    
 
@@ -30,7 +30,7 @@ public class MoneyManager : MonoBehaviour
         currentMoney += addedMoney; //++money
         timePassed = 0f;
         }
-        UpdateGoldText(currentMoney, displayMoney);
+    UpdateGoldText(currentMoney, displayMoney);
     }
 
     // 

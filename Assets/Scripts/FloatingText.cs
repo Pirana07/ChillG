@@ -7,11 +7,11 @@ public class FloatingText : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
 
     [Header("In(out)Come Settings")]
-    [SerializeField] private GameObject moneyAddedText;
-    [SerializeField] private GameObject moneyDecreasedText;
+    [SerializeField] GameObject moneyAddedText;
+    [SerializeField] GameObject moneyDecreasedText;
 
     [Header("Display Settings")]
-    [SerializeField] private float seconds = 0.9f;
+     [Range(0f, 1f)][SerializeField] float seconds = 0.9f;
     [SerializeField] TMP_Text moneyAddedTextTmp;
     [SerializeField] TMP_Text moneyDecreasedTextTmp;
     float timePassed;
