@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class MoneyManager : MonoBehaviour
 {
@@ -11,11 +12,16 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] TMP_Text displayMoney;
     public float addedMoney = 1f;
     public float currentMoney = 0;
-    public enum MoneyState{MoneyAdded, MoneyDecreased};
-    public MoneyState currentState;
-   public int finalCost = 0;
     public MoneyButton moneyButton;
+
+    [Header("Outcome Settings")]
+    public int finalCost = 0;
+
+    [Header("IncomeState")]
+     public MoneyState currentState; 
+    public enum MoneyState{MoneyAdded, MoneyDecreased};
    
+
  private void Update() {
     timePassed += Time.deltaTime;
 
@@ -24,11 +30,12 @@ public class MoneyManager : MonoBehaviour
         currentMoney += addedMoney; //++money
         timePassed = 0f;
         }
-    
         UpdateGoldText(currentMoney, displayMoney);
-
     }
 
+    // 
+    // Money Display Format
+    //
      public void UpdateGoldText(double moneyCount, TMP_Text textToChange, string endText = "")
     {
         string[] suffixes = { "", "K", "M", "B", "T", "Q" };

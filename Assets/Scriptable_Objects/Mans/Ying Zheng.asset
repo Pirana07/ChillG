@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb9449944e19f34aa2a86cda2c0128f, type: 3}
+  m_Name: Ying Zheng
+  m_EditorClassIdentifier: 
+  name: 'Ying Zheng '
+  desc: Miner from old China(Qin)
+  artWork: {fileID: -5513050994037168576, guid: 37c7afa08a877da42866ef2e00c91c6f, type: 3}
+  Income: 10
+  Cost: 1000

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb9449944e19f34aa2a86cda2c0128f, type: 3}
+  m_Name: Tutankhamun
+  m_EditorClassIdentifier: 
+  name: Tutankhamun
+  desc: Miner from old egypt
+  artWork: {fileID: 2912297781628502651, guid: d10be25fa466bc0489599e06607d8328, type: 3}
+  Income: 5
+  Cost: 500

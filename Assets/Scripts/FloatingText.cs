@@ -3,29 +3,31 @@ using TMPro;
 
 public class FloatingText : MonoBehaviour
 {
-    [SerializeField] private GameObject text;
-    [SerializeField] private GameObject text2;
-    [SerializeField] private float seconds = 0.9f;
-    [SerializeField] TMP_Text displayMoney;
-    [SerializeField] TMP_Text textdecrease;
-
+    [Header("Managers")]
     [SerializeField] MoneyManager moneyManager;
 
+    [Header("In(out)Come Settings")]
+    [SerializeField] private GameObject moneyAddedText;
+    [SerializeField] private GameObject moneyDecreasedText;
+
+    [Header("Display Settings")]
+    [SerializeField] private float seconds = 0.9f;
+    [SerializeField] TMP_Text moneyAddedTextTmp;
+    [SerializeField] TMP_Text moneyDecreasedTextTmp;
     float timePassed;
 
     private void Update()
     {
         timePassed += Time.deltaTime;
-
         if (timePassed > seconds)
         {
             MoneyText();
-            text.SetActive(true);
+            moneyAddedText.SetActive(true);
             timePassed = 0f;
         }
         else if (timePassed > 0.45f )
         {
-            text.SetActive(false);
+            moneyAddedText.SetActive(false);
         }
     }
     
@@ -34,17 +36,15 @@ public class FloatingText : MonoBehaviour
          switch (moneyManager.currentState)
             {
                 case MoneyManager.MoneyState.MoneyAdded:
-                    text2.SetActive(false);
-                    moneyManager.UpdateGoldText(moneyManager.addedMoney, displayMoney, "+");
-                    displayMoney.color = Color.green;
+                    moneyDecreasedText.SetActive(false);
+                    moneyManager.UpdateGoldText(moneyManager.addedMoney, moneyAddedTextTmp, "+"); //from MoneyManager(format)
+                    moneyAddedTextTmp.color = Color.green;
                     break;
-
                 case MoneyManager.MoneyState.MoneyDecreased:
-                    text2.SetActive(true);
-                    moneyManager.UpdateGoldText(moneyManager.finalCost, textdecrease, "-");
-                    textdecrease.color = Color.red;
-
-                    moneyManager.finalCost = 0;
+                    moneyDecreasedText.SetActive(true);
+                    moneyManager.UpdateGoldText(moneyManager.finalCost, moneyDecreasedTextTmp, "-"); //from MoneyManager(format)
+                    moneyDecreasedTextTmp.color = Color.red;
+                    moneyManager.finalCost = 0; //resetes money decrease from buying upgrades(UpgradeButtonScript)
                 break;
             }
     }

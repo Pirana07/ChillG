@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class MenuButtons : MonoBehaviour
 {
+    [Header("SideMenu Settings")]
     [SerializeField] GameObject[] menuObject;
 
+    //temporary code:
     public void OnClickMenu(int menuIndex)
     {
         //fixed buges and much better code:

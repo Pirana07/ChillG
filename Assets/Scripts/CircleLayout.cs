@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CircleLayout : MonoBehaviour
 {
+    //this file will be deleted
     [SerializeField] private GameObject[] objectsToArrange;
     [SerializeField] private float radius = 5f;
     [SerializeField] private float startAngle = 0f;

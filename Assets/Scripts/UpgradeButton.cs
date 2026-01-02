@@ -4,16 +4,20 @@ using TMPro;
 
 public class UpgradeButton : MonoBehaviour
 {
+    [Header("Managers")]
     [SerializeField] MoneyManager moneyManager;
-    [SerializeField] TMP_Text[] buttonText;
-    [SerializeField] TMP_Text[] costText;
-    [SerializeField] GameObject[] pickaxeArray;
-    [SerializeField] Sprite[] coinSprites;
-    [SerializeField] Button buttonCoinSprite;
     [SerializeField] SpawnMan spawnManScript;
 
+    [Header("CoinButton Settings")]
+    [SerializeField] Sprite[] coinSprites;
+    [SerializeField] Button buttonCoinSprite;
 
-    [SerializeField] string[] TextButton;
+    [Header("Upgrade Button Settings")]
+    [SerializeField] TMP_Text[] upgradeButtonText;
+    [SerializeField] string[] textForUpgradeButton;
+
+    // [SerializeField] TMP_Text[] upgradeButtonCostText;
+    // [SerializeField] GameObject[] pickaxeArray;
 
     float stateDuration = 1f;
     float[] resetTimers;
@@ -42,7 +46,7 @@ public class UpgradeButton : MonoBehaviour
                 resetTimers[i] -= Time.deltaTime;
                 
                 if (resetTimers[i] <= 0f)
-                  buttonText[i].text = TextButton[i];  
+                  upgradeButtonText[i].text = textForUpgradeButton[i];  
             }
         }
     }
@@ -86,7 +90,7 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         buttonCoinSprite.image.sprite = coinSprites[k/20000];
         
         if (buttonIndex == 1)
-        moneyManager.moneyButton.onClickMoneyAdded += 1f;
+        moneyManager.moneyButton.onClickMoneyAddedText += 1f;
        
         // costText[0].text = "Cost: " + (25 + i) + "$";
         // costText[1].text = "Cost: " + (200 + j) + "$";
@@ -98,7 +102,7 @@ void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
         if(buttonIndex == 0)
             Debug.Log("nope");
         else{
-            buttonText[buttonIndex].text = "Not enough money!";
+            upgradeButtonText[buttonIndex].text = "Not enough money!";
             resetTimers[buttonIndex] = 1f; 
         }
     }
