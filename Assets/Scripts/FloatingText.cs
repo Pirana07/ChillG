@@ -9,6 +9,8 @@ public class FloatingText : MonoBehaviour
     [Header("In(out)Come Settings")]
     [SerializeField] GameObject moneyAddedText;
     [SerializeField] GameObject moneyDecreasedText;
+    public int costDisplay = 0;
+
 
     [Header("Display Settings")]
      [Range(0f, 1f)][SerializeField] float seconds = 0.9f;
@@ -42,9 +44,9 @@ public class FloatingText : MonoBehaviour
                     break;
                 case MoneyManager.MoneyState.MoneyDecreased:
                     moneyDecreasedText.SetActive(true);
-                    moneyManager.UpdateGoldText(moneyManager.finalCost, moneyDecreasedTextTmp, "-"); //from MoneyManager(format)
+                    moneyManager.UpdateGoldText(costDisplay, moneyDecreasedTextTmp, "-"); //from MoneyManager(format)
                     moneyDecreasedTextTmp.color = Color.red;
-                    moneyManager.finalCost = 0; //resetes money decrease from buying upgrades(UpgradeButtonScript)
+                    costDisplay = 0; //resetes money decrease from buying upgrades(UpgradeButtonScript)
                 break;
             }
     }

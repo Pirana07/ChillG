@@ -5,99 +5,71 @@ using TMPro;
 public class UpgradeButton : MonoBehaviour
 {
     [Header("Managers")]
-    [SerializeField] MoneyManager moneyManager;
-    [SerializeField] SpawnMan spawnManScript;
+    [SerializeField] MoneyManager moneyManager; 
+    [SerializeField] FloatingText floatingText;
+    [SerializeField] SpawnMan spawnManScript; 
+    [SerializeField] UpgradeData upgrade; //UpgradeButton scriptableObject 
 
-    [Header("CoinButton Settings")]
-    [SerializeField] Sprite[] coinSprites;
-    [SerializeField] Button buttonCoinSprite;
-
-    [Header("Upgrade Button Settings")]
-    [SerializeField] TMP_Text[] upgradeButtonText;
-    [SerializeField] string[] textForUpgradeButton;
-
-    // [SerializeField] TMP_Text[] upgradeButtonCostText;
-    // [SerializeField] GameObject[] pickaxeArray;
-    [Header("UpgradeType Settings")]
-    float stateDuration = 1f;
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    float[] resetTimers;
-     public enum UpgradeButtonType
-    {
-        CoinUpgrade, 
-        ManSpawner,
-        ClickUpgrade
-    }
-   void Awake()
-    {
-        resetTimers = new float[3]; 
-    }
-  void Update()
-    {
-        for (int i = 0; i < resetTimers.Length; i++)
-        {
-            if (resetTimers[i] > 0f)
-            {
-                resetTimers[i] -= Time.deltaTime;
-                
-                if (resetTimers[i] <= 0f)
-                  upgradeButtonText[i].text = textForUpgradeButton[i];  
-            }
-        }
-    }
-    public void Upgrade(int index)
-    {
-        UpgradeButtonType buttonTypeIndex = (UpgradeButtonType)index;
-        switch (buttonTypeIndex)
-        {
-            case UpgradeButtonType.ManSpawner: BuyUpgrade(25, 0, 1f, ref i); break;
-            case UpgradeButtonType.CoinUpgrade: BuyUpgrade(200, 1, 10f, ref j); break;
-            case UpgradeButtonType.ClickUpgrade: BuyUpgrade(20000, 2, 150f,ref k); break;
-        }
-    }
-    void ResetMoneyState(){
-        moneyManager.currentState = MoneyManager.MoneyState.MoneyAdded;
-    }
+    [Header("Upgrade UI")]
+    [SerializeField] TMP_Text nameText;
+    [SerializeField] TMP_Text costText;
     
-void BuyUpgrade(int cost, int buttonIndex, float upgradedmoney, ref int counter)
-{
-     moneyManager.finalCost = cost + counter;
+    // [SerializeField] TMP_Text levelText;
 
-    if (moneyManager.currentMoney >= moneyManager.finalCost)
+    void Start()
     {
-        moneyManager.currentMoney -= moneyManager.finalCost;
-        counter += cost;
-
-        moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased;
-        CancelInvoke(nameof(ResetMoneyState));
-        Invoke(nameof(ResetMoneyState), stateDuration);
-
-        moneyManager.addedMoney += upgradedmoney;
-        spawnManScript.OnClickMinerButton();
-        
-        if(k/20000 < 7)
-        buttonCoinSprite.image.sprite = coinSprites[k/20000];
-        
-        if (buttonIndex == 1)
-        moneyManager.moneyButton.onClickMoneyAddedText += 1f;
-        // if(i/25 < 21)
-        // pickaxeArray[i/25].SetActive(true);
-        // costText[0].text = "Cost: " + (25 + i) + "$";
-        // costText[1].text = "Cost: " + (200 + j) + "$";
-        // costText[2].text = "Cost: " + (20000 + k) + "$";
+        RefreshUI();
+        upgrade.currentLevel = 0;
     }
-    else
+
+    public void BuyUpgrade()
     {
-       
-        if(buttonIndex == 0)
-            Debug.Log("nope");
-        else{
-            upgradeButtonText[buttonIndex].text = "Not enough money!";
-            resetTimers[buttonIndex] = 1f; 
+        if(upgrade.currentLevel >= upgrade.maxLevel) //Checks if I can upgrade more, or is it some kind of max(like in miners, u can do max 5)
+            return;
+
+        int cost = GetCost(); //upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease
+
+        if(moneyManager.currentMoney < cost)//checks if i can buy it, if not enough, then return and dont buy 
+            return;
+
+        moneyManager.currentMoney -= cost;//buys it and deacreses money
+        upgrade.currentLevel++; //tracks how many times i upgraded
+        
+        MoneyDecreased(cost);//Displays Decrease
+        ApplyUpgrades();
+        RefreshUI();//changes cost display
+
+        CancelInvoke(nameof(ResetMoneyState));
+        Invoke(nameof(ResetMoneyState), 1f);
+    }
+
+   
+
+    void ApplyUpgrades()
+    {
+        switch (upgrade.upgradeType) //Upgrades Based on Type:
+        {
+            case UpgradeData.UpgradeButtonType.ManSpawner: spawnManScript.OnClickMinerButton(); break; 
+            case UpgradeData.UpgradeButtonType.ClickUpgrade: moneyManager.moneyButton.onClickMoneyAddedText += upgrade.valuePerLevel;break; 
+            // case UpgradeData.UpgradeButtonType.CoinUpgrade: ; break; *i should delete this)
         }
     }
-}
-
+     int GetCost()
+    {
+        return upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease;
+    }
+    void ResetMoneyState()//uses FloatingTextScript
+    { 
+        moneyManager.currentState = MoneyManager.MoneyState.MoneyAdded; 
+    }
+    void MoneyDecreased(int cost)//displays money decrease(uses FloatingTextScript)
+    { 
+        floatingText.costDisplay = cost;
+        moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased; 
+    }
+    void RefreshUI()
+    {
+        nameText.text = upgrade.displayName;
+        costText.text = GetCost() + "$";
+    }
 }
