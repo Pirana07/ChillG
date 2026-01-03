@@ -4,25 +4,19 @@ public class SpawnMan : MonoBehaviour
 {
   [Header("Miner Settings")]
   [SerializeField] GameObject[] miner;
+  [SerializeField] MoneyManager moneyManager; 
+
 
   [Header("Miner UI Settings")]
   [SerializeField] GameObject minerButton;
   int minerIndex;
 
   [Header("Miner Evolve Settings")]
-  [Range(0, 2)][SerializeField] int Evolve;
+  // [Range(0, 2)][SerializeField] int Evolve;
   [SerializeField] Mans[] man;
   [SerializeField] SpriteRenderer[] minerSpriteRenderer;
 
-  void Update()
-  {
-    switch (Evolve)
-    {
-      case 0: EvolveMan(Evolve); break;
-      case 1: EvolveMan(Evolve); break;
-      case 2: EvolveMan(Evolve); break;
-      }
-  }
+ 
   void EvolveMan(int EvolveIndex)//this should be another script... Temporary function
   {
     for (int i = 0; i < 7; i++)
@@ -38,4 +32,23 @@ public class SpawnMan : MonoBehaviour
       if(minerIndex == 6)
       minerButton.SetActive(false);
   }
+
+  public void ResetMiners()
+{
+    // Deactivate all miners
+    for (int i = 0; i < miner.Length; i++)
+    {
+      miner[i].SetActive(false);
+    }
+
+    // Reset index so player can spawn miners again
+    minerIndex = 0;
+
+    // Re-enable the miner button if needed
+    minerButton.SetActive(true);
+
+    // Update artwork for the new evolution tier
+    EvolveMan(moneyManager.rebirthCounter);
+}
+
 }

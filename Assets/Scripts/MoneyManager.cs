@@ -14,19 +14,22 @@ public class MoneyManager : MonoBehaviour
     public float currentMoney = 0;
     public MoneyButton moneyButton;
 
-    [Header("Outcome Settings")]
-    public int finalCost = 0;
-
     [Header("IncomeState")]
     public MoneyState currentState; 
     public enum MoneyState{MoneyAdded, MoneyDecreased};
-   
+    
+    [Header("Rebirth Settings")]
+    public int rebirthCounter = 0;
+    public int rebirthMultiplier = 1;
+
+
 
  private void Update() {
     timePassed += Time.deltaTime;
 
     if(timePassed > seconds)
     {
+        addedMoney = addedMoney * rebirthMultiplier;
         currentMoney += addedMoney; //++money
         timePassed = 0f;
         }

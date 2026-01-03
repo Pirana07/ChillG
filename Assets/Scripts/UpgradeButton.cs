@@ -6,6 +6,7 @@ public class UpgradeButton : MonoBehaviour
 {
     [Header("Managers")]
     [SerializeField] MoneyManager moneyManager; 
+     [SerializeField] RebirthManager rebirthManager;
     [SerializeField] FloatingText floatingText;
     [SerializeField] SpawnMan spawnManScript; 
     [SerializeField] UpgradeData upgrade; //UpgradeButton scriptableObject 
@@ -15,13 +16,11 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] TMP_Text costText;
     
     // [SerializeField] TMP_Text levelText;
-
     void Start()
     {
-        RefreshUI();
         upgrade.currentLevel = 0;
+        RefreshUI();
     }
-
     public void BuyUpgrade()
     {
         if(upgrade.currentLevel >= upgrade.maxLevel) //Checks if I can upgrade more, or is it some kind of max(like in miners, u can do max 5)
@@ -43,20 +42,20 @@ public class UpgradeButton : MonoBehaviour
         Invoke(nameof(ResetMoneyState), 1f);
     }
 
-   
-
     void ApplyUpgrades()
     {
         switch (upgrade.upgradeType) //Upgrades Based on Type:
         {
             case UpgradeData.UpgradeButtonType.ManSpawner: spawnManScript.OnClickMinerButton(); break; 
             case UpgradeData.UpgradeButtonType.ClickUpgrade: moneyManager.moneyButton.onClickMoneyAddedText += upgrade.valuePerLevel;break; 
+            case UpgradeData.UpgradeButtonType.EvolutionRebirth: rebirthManager.Rebirth(); break; 
+
             // case UpgradeData.UpgradeButtonType.CoinUpgrade: ; break; *i should delete this)
         }
     }
-     int GetCost()
+    int GetCost()
     {
-        return upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease;
+        return upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease * moneyManager.rebirthMultiplier;
     }
     void ResetMoneyState()//uses FloatingTextScript
     { 
@@ -67,7 +66,7 @@ public class UpgradeButton : MonoBehaviour
         floatingText.costDisplay = cost;
         moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased; 
     }
-    void RefreshUI()
+    public void RefreshUI()
     {
         nameText.text = upgrade.displayName;
         costText.text = GetCost() + "$";

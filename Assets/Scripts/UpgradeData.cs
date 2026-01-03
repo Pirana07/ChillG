@@ -19,6 +19,8 @@ public class UpgradeData : ScriptableObject
     {
         CoinUpgrade, 
         ManSpawner,
-        ClickUpgrade
+        ClickUpgrade,
+        EvolutionRebirth
+
     }
 }
