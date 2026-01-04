@@ -4,12 +4,9 @@ using Unity.VisualScripting;
 
 public class MoneyManager : MonoBehaviour
 {
-    [Header("Time Settings")]
-    [Range(0f, 2f)][SerializeField] float seconds = 1f;
-    float timePassed = 0f;
 
     [Header("Income Settings")]
-    [SerializeField] TMP_Text displayMoney;
+    public TMP_Text displayMoney;
     public float addedMoney = 1f;
     public float currentMoney = 0;
     public MoneyButton moneyButton;
@@ -23,23 +20,10 @@ public class MoneyManager : MonoBehaviour
     public int rebirthMultiplier = 1;
 
 
-
- private void Update() {
-    timePassed += Time.deltaTime;
-
-    if(timePassed > seconds)
-    {
-        addedMoney = addedMoney * rebirthMultiplier;
-        currentMoney += addedMoney; //++money
-        timePassed = 0f;
-        }
-    UpdateGoldText(currentMoney, displayMoney);
-    }
-
     // 
     // Money Display Format
     //
-     public void UpdateGoldText(double moneyCount, TMP_Text textToChange, string endText = "")
+     public void UpdateGoldText(double moneyCount, TMP_Text textToChange, string endText = "")//Issue
     {
         string[] suffixes = { "", "K", "M", "B", "T", "Q" };
         int index = 0;

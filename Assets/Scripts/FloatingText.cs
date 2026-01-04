@@ -5,15 +5,15 @@ public class FloatingText : MonoBehaviour
 {
     [Header("Managers")]
     [SerializeField] MoneyManager moneyManager;
+    [SerializeField] PassiveIncome passiveIncome;
 
     [Header("In(out)Come Settings")]
-    [SerializeField] GameObject moneyAddedText;
+    // [SerializeField] GameObject moneyAddedText;
     [SerializeField] GameObject moneyDecreasedText;
     public int costDisplay = 0;
 
-
     [Header("Display Settings")]
-     [Range(0f, 1f)][SerializeField] float seconds = 0.9f;
+    [Range(0f, 1f)][SerializeField] float seconds = 0.9f;
     [SerializeField] TMP_Text moneyAddedTextTmp;
     [SerializeField] TMP_Text moneyDecreasedTextTmp;
     float timePassed;
@@ -24,30 +24,30 @@ public class FloatingText : MonoBehaviour
         if (timePassed > seconds)
         {
             MoneyText();
-            moneyAddedText.SetActive(true);
+            moneyAddedTextTmp.alpha = 1f;
             timePassed = 0f;
         }
-        else if (timePassed > 0.45f )
+        else if (timePassed > 0.45f)
         {
-            moneyAddedText.SetActive(false);
+            moneyAddedTextTmp.alpha = 0.7f;
         }
     }
-    
+
     void MoneyText()
     {
-         switch (moneyManager.currentState)
-            {
-                case MoneyManager.MoneyState.MoneyAdded:
-                    moneyDecreasedText.SetActive(false);
-                    moneyManager.UpdateGoldText(moneyManager.addedMoney, moneyAddedTextTmp, "+"); //from MoneyManager(format)
-                    moneyAddedTextTmp.color = Color.green;
-                    break;
-                case MoneyManager.MoneyState.MoneyDecreased:
-                    moneyDecreasedText.SetActive(true);
-                    moneyManager.UpdateGoldText(costDisplay, moneyDecreasedTextTmp, "-"); //from MoneyManager(format)
-                    moneyDecreasedTextTmp.color = Color.red;
-                    costDisplay = 0; //resetes money decrease from buying upgrades(UpgradeButtonScript)
+        switch (moneyManager.currentState)
+        {
+            case MoneyManager.MoneyState.MoneyAdded:
+                moneyDecreasedText.SetActive(false);
+                moneyManager.UpdateGoldText(passiveIncome.PassiveIncomeMoney(), moneyAddedTextTmp, "+"); //from MoneyManager(format)
+                moneyAddedTextTmp.color = Color.green;
                 break;
-            }
+            case MoneyManager.MoneyState.MoneyDecreased:
+                moneyDecreasedText.SetActive(true);
+                moneyManager.UpdateGoldText(costDisplay, moneyDecreasedTextTmp, "-"); //from MoneyManager(format)
+                moneyDecreasedTextTmp.color = Color.red;
+                costDisplay = 0; //resetes money decrease from buying upgrades(UpgradeButtonScript)
+                break;
+        }
     }
 }

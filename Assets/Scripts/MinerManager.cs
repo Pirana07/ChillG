@@ -1,23 +1,22 @@
 using UnityEngine;
 
-public class SpawnMan : MonoBehaviour
+public class MinerManager : MonoBehaviour
 {
   [Header("Miner Settings")]
   [SerializeField] GameObject[] miner;
-  [SerializeField] MoneyManager moneyManager; 
-
+  [SerializeField] MoneyManager moneyManager;
 
   [Header("Miner UI Settings")]
   [SerializeField] GameObject minerButton;
-  int minerIndex;
+  public int minerIndex;
 
   [Header("Miner Evolve Settings")]
   // [Range(0, 2)][SerializeField] int Evolve;
   [SerializeField] Mans[] man;
   [SerializeField] SpriteRenderer[] minerSpriteRenderer;
 
- 
-  void EvolveMan(int EvolveIndex)//this should be another script... Temporary function
+
+  void EvolveMan(int EvolveIndex)//Evolution(Rebirth)
   {
     for (int i = 0; i < 7; i++)
     {
@@ -27,14 +26,14 @@ public class SpawnMan : MonoBehaviour
 
   public void OnClickMinerButton()
   {
-      miner[minerIndex].SetActive(true);
-      minerIndex = minerIndex + 1;
-      if(minerIndex == 6)
+    miner[minerIndex].SetActive(true);
+    minerIndex = minerIndex + 1;
+    if (minerIndex == 6)
       minerButton.SetActive(false);
   }
 
   public void ResetMiners()
-{
+  {
     // Deactivate all miners
     for (int i = 0; i < miner.Length; i++)
     {
@@ -49,6 +48,6 @@ public class SpawnMan : MonoBehaviour
 
     // Update artwork for the new evolution tier
     EvolveMan(moneyManager.rebirthCounter);
-}
+  }
 
 }

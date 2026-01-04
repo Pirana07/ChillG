@@ -4,7 +4,7 @@ public class RebirthManager : MonoBehaviour
 {
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] UpgradeData[] allUpgrades;
-    [SerializeField] SpawnMan spawnMan;
+    [SerializeField] MinerManager minerManager;
     UpgradeButton[] allUpgradeButtons;
 
     void Awake()
@@ -26,7 +26,7 @@ public class RebirthManager : MonoBehaviour
             btn.RefreshUI();
         
         //Reset miners
-        spawnMan.ResetMiners();
+        minerManager.ResetMiners();
         
     }
 }
