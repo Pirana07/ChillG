@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 
 public class MoneyManager : MonoBehaviour
 {
+    public static MoneyManager Instance { get; private set; } //Singleton
 
     [Header("Income Settings")]
     public TMP_Text displayMoney;
@@ -12,18 +13,34 @@ public class MoneyManager : MonoBehaviour
     public MoneyButton moneyButton;
 
     [Header("IncomeState")]
-    public MoneyState currentState; 
-    public enum MoneyState{MoneyAdded, MoneyDecreased};
-    
+    public MoneyState currentState;
+    public enum MoneyState { MoneyAdded, MoneyDecreased };
+
     [Header("Rebirth Settings")]
     public int rebirthCounter = 0;
+    public int evolveCounter = 0;
+    public int currentEvolve = 0;
     public int rebirthMultiplier = 1;
 
 
-    // 
-    // Money Display Format
-    //
-     public void UpdateGoldText(double moneyCount, TMP_Text textToChange, string endText = "")//Issue
+    void Awake()
+    {
+        //if there is more than one instance then destroy
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    
+    /// <summary>
+    /// Money Display Format
+    /// </summary>
+    public void UpdateGoldText(double moneyCount, TMP_Text textToChange, string endText = "")//Issue
     {
         string[] suffixes = { "", "K", "M", "B", "T", "Q" };
         int index = 0;

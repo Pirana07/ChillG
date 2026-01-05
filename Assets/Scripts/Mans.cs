@@ -9,9 +9,9 @@ public class Mans : ScriptableObject {
     public string desc;
     public Sprite artWork;
 
-    [Header("MoneyRelated")]
-    public int Income;
-    public int Cost;
+    // [Header("MoneyRelated")]
+    // public int Income;
+    // public int Cost;
     
 
 }

@@ -14,13 +14,16 @@ public class UpgradeData : ScriptableObject
     public float valuePerLevel;
     public int maxLevel;
     public int currentLevel;
-    
+
+    [Tooltip("Upgrade becomes available only after player rebirths.")]//that's a new thing
+    public bool unlockAfterRebirth = false;
+
      public enum UpgradeButtonType
     {
         CoinUpgrade, 
         ManSpawner,
         ClickUpgrade,
-        EvolutionRebirth
-
+        Rebirth,
+        Evolve
     }
 }

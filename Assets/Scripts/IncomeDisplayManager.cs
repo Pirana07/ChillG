@@ -1,8 +1,10 @@
 using UnityEngine;
 using TMPro;
 
-public class FloatingText : MonoBehaviour
+public class IncomeDisplayManager : MonoBehaviour
 {
+    public static IncomeDisplayManager Instance { get; private set; } //Singleton
+
     [Header("Managers")]
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] PassiveIncome passiveIncome;
@@ -17,7 +19,18 @@ public class FloatingText : MonoBehaviour
     [SerializeField] TMP_Text moneyAddedTextTmp;
     [SerializeField] TMP_Text moneyDecreasedTextTmp;
     float timePassed;
+    void Awake()
+    {
+        //if there is more than one instance then destroy
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
 
+        Instance = this;
+    }
+    
     private void Update()
     {
         timePassed += Time.deltaTime;

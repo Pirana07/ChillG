@@ -5,10 +5,10 @@ using TMPro;
 public class UpgradeButton : MonoBehaviour
 {
     [Header("Managers")]
-    [SerializeField] MoneyManager moneyManager;
-    [SerializeField] RebirthManager rebirthManager;
-    [SerializeField] FloatingText floatingText;
-    [SerializeField] MinerManager minerManager;
+    MoneyManager moneyManager;
+    RebirthManager rebirthManager;
+    IncomeDisplayManager incomeDisplayManager;
+    MinerManager minerManager;
     [SerializeField] UpgradeData upgrade; //UpgradeButton scriptableObject 
 
     [Header("Upgrade UI")]
@@ -16,8 +16,14 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] TMP_Text costText;
 
     // [SerializeField] TMP_Text levelText;
+
     void Start()
     {
+        moneyManager = MoneyManager.Instance;
+        rebirthManager = RebirthManager.Instance;
+        minerManager = MinerManager.Instance;
+        incomeDisplayManager = IncomeDisplayManager.Instance;
+
         upgrade.currentLevel = 0;
         upgrade.baseCost *= moneyManager.rebirthCounter + 1;
         RefreshUI();
@@ -49,8 +55,8 @@ public class UpgradeButton : MonoBehaviour
         {
             case UpgradeData.UpgradeButtonType.ManSpawner: minerManager.OnClickMinerButton(); break;
             case UpgradeData.UpgradeButtonType.ClickUpgrade: moneyManager.moneyButton.onClickMoneyAddedText += upgrade.valuePerLevel; break;
-            case UpgradeData.UpgradeButtonType.EvolutionRebirth: rebirthManager.Rebirth(); break;
-
+            case UpgradeData.UpgradeButtonType.Rebirth: rebirthManager.Rebirth(); break;
+            case UpgradeData.UpgradeButtonType.Evolve: rebirthManager.Evolve(); break;
                 // case UpgradeData.UpgradeButtonType.CoinUpgrade: ; break; *i should delete this)
         }
     }
@@ -58,17 +64,25 @@ public class UpgradeButton : MonoBehaviour
     {
         return upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease * moneyManager.rebirthMultiplier;
     }
-    void ResetMoneyState()//uses FloatingTextScript
+    void ResetMoneyState()//uses incomeDisplayManager
     {
         moneyManager.currentState = MoneyManager.MoneyState.MoneyAdded;
     }
-    void MoneyDecreased(int cost)//displays money decrease(uses FloatingTextScript)
+    void MoneyDecreased(int cost)//displays money decrease(uses incomeDisplayManager)
     {
-        floatingText.costDisplay = cost;
+        incomeDisplayManager.costDisplay = cost;
         moneyManager.currentState = MoneyManager.MoneyState.MoneyDecreased;
     }
     public void RefreshUI()
     {
+        if (upgrade.unlockAfterRebirth && moneyManager.rebirthCounter == 0)
+        {
+            // Hide or disable button
+            gameObject.SetActive(false);
+            return;
+        }
+        
+        gameObject.SetActive(true); // visible if unlocked
         nameText.text = upgrade.displayName;
         costText.text = GetCost() + "$";
     }

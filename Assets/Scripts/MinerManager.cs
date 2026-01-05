@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MinerManager : MonoBehaviour
 {
+  public static MinerManager Instance { get; private set; } //Singleton
+
   [Header("Miner Settings")]
   [SerializeField] GameObject[] miner;
   [SerializeField] MoneyManager moneyManager;
@@ -16,6 +18,19 @@ public class MinerManager : MonoBehaviour
   [SerializeField] Mans[] man;
   [SerializeField] SpriteRenderer[] minerSpriteRenderer;
 
+  void Awake()
+  {
+    //if there is more than one instance then destroy
+    if (Instance != null && Instance != this)
+    {
+      Destroy(this);
+      return;
+    }
+
+    Instance = this;
+    DontDestroyOnLoad(gameObject);
+  }
+
   void Start()
   {
     startingPositions = new Vector3[miner.Length];//need this to reset position when rebirth
@@ -25,7 +40,7 @@ public class MinerManager : MonoBehaviour
     }
   }
 
-  void EvolveMan(int EvolveIndex)//Evolution(Rebirth)
+  public void EvolveMan(int EvolveIndex)//Evolution(Rebirth)
   {
     for (int i = 0; i < minerSpriteRenderer.Length; i++)
     {
@@ -41,7 +56,7 @@ public class MinerManager : MonoBehaviour
       minerButton.SetActive(false);
   }
 
-  public void ResetMiners()
+  public void ResetMiners()//must change
   {
     // Deactivate all miners
     for (int i = 0; i < miner.Length; i++)
@@ -56,8 +71,7 @@ public class MinerManager : MonoBehaviour
     // Re-enable the miner button if needed
     minerButton.SetActive(true);
 
-    // Update artwork for the new evolution tier
-    EvolveMan(moneyManager.rebirthCounter);
+
 
   }
 
