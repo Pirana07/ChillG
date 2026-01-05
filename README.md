@@ -1,4 +1,4 @@
-# ChillG
+# Clicker game
 
 Idle Mining Clicker Game
 
