@@ -18,8 +18,6 @@ public class MoneyManager : MonoBehaviour
 
     [Header("Rebirth Settings")]
     public int rebirthCounter = 0;
-    public int evolveCounter = 0;
-    public int currentEvolve = 0;
     public int rebirthMultiplier = 1;
 
 

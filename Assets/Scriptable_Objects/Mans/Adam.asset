@@ -15,5 +15,4 @@ MonoBehaviour:
   name: Adam
   desc: Primitive miner
   artWork: {fileID: 8029351004527951999, guid: 0ba2f01246223a2449b6440e6cc3de34, type: 3}
-  Income: 1
-  Cost: 25
+  minerIncome: 100

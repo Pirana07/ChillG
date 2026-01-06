@@ -3,14 +3,21 @@ using UnityEngine;
 public class PassiveIncome : MonoBehaviour
 {
     [Header("Managers")]
-    [SerializeField] MoneyManager moneyManager;
-    [SerializeField] MinerManager minerManager;
-
+    MoneyManager moneyManager;
+    MinerManager minerManager;
+    RebirthManager rebirthManager;
 
     [Header("Time Settings")]
     [Range(0f, 2f)][SerializeField] float seconds = 1f;
     float timePassed = 0f;
 
+
+    void Start()
+    {
+        moneyManager = MoneyManager.Instance;
+        rebirthManager = RebirthManager.Instance;
+        minerManager = MinerManager.Instance;
+    }
 
     private void Update()
     {
@@ -26,6 +33,11 @@ public class PassiveIncome : MonoBehaviour
 
     public float PassiveIncomeMoney()
     {
-        return moneyManager.addedMoney * moneyManager.rebirthMultiplier * minerManager.minerIndex;
+        return MinerIncomeMoney() * moneyManager.rebirthMultiplier * minerManager.minerCounter;
+    }
+
+    float MinerIncomeMoney()
+    {
+        return minerManager.man[rebirthManager.evolutionIndex].minerIncome;
     }
 }

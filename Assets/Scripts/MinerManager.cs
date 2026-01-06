@@ -11,11 +11,11 @@ public class MinerManager : MonoBehaviour
 
   [Header("Miner UI Settings")]
   [SerializeField] GameObject minerButton;
-  public int minerIndex;
+  public int minerCounter;
 
   [Header("Miner Evolve Settings")]
   // [Range(0, 2)][SerializeField] int Evolve;
-  [SerializeField] Mans[] man;
+  [SerializeField] public Mans[] man;
   [SerializeField] SpriteRenderer[] minerSpriteRenderer;
 
   void Awake()
@@ -50,9 +50,9 @@ public class MinerManager : MonoBehaviour
 
   public void OnClickMinerButton()
   {
-    miner[minerIndex].SetActive(true);
-    minerIndex = minerIndex + 1;
-    if (minerIndex == miner.Length)
+    miner[minerCounter].SetActive(true);
+    minerCounter = minerCounter + 1;
+    if (minerCounter == miner.Length)
       minerButton.SetActive(false);
   }
 
@@ -66,7 +66,7 @@ public class MinerManager : MonoBehaviour
     }
 
     // Reset index so player can spawn miners again
-    minerIndex = 0;
+    minerCounter = 0;
 
     // Re-enable the miner button if needed
     minerButton.SetActive(true);

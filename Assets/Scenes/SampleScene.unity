@@ -232,8 +232,6 @@ MonoBehaviour:
   moneyButton: {fileID: 55012520}
   currentState: 0
   rebirthCounter: 0
-  evolveCounter: 0
-  currentEvolve: 0
   rebirthMultiplier: 1
 --- !u!4 &55012518
 Transform:
@@ -332,7 +330,7 @@ MonoBehaviour:
   - {fileID: 1015995819}
   moneyManager: {fileID: 55012517}
   minerButton: {fileID: 1793074906}
-  minerIndex: 0
+  minerCounter: 0
   man:
   - {fileID: 11400000, guid: fa00d2c27aaff3848934a5917cd47120, type: 2}
   - {fileID: 11400000, guid: 6b419a0c64de5a64985b0c1026b6f4d8, type: 2}
@@ -379,6 +377,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54571c7d24f104e4f8a505e8e01e2984, type: 2}
   - {fileID: 11400000, guid: 65fdb4ec37895a14cbe3ba5007dd6ad5, type: 2}
   minerManager: {fileID: 55012523}
+  evolutionIndex: 0
 --- !u!114 &55012525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,8 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea46f1ea2816494a9ca0e021f08eeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyManager: {fileID: 55012517}
-  minerManager: {fileID: 55012523}
   seconds: 1
 --- !u!1 &63420478
 GameObject:
@@ -16214,7 +16211,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 54824623}
   - {fileID: 788703854}
-  - {fileID: 55012518}
   - {fileID: 489105291}
   - {fileID: 4732261268051545887}
   - {fileID: 1957325493}
@@ -16228,3 +16224,4 @@ SceneRoots:
   - {fileID: 558321756}
   - {fileID: 207628396}
   - {fileID: 1381535755}
+  - {fileID: 55012518}

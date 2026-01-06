@@ -15,5 +15,4 @@ MonoBehaviour:
   name: Tutankhamun
   desc: Miner from old egypt
   artWork: {fileID: 2912297781628502651, guid: d10be25fa466bc0489599e06607d8328, type: 3}
-  Income: 5
-  Cost: 500
+  minerIncome: 0
