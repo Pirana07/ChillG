@@ -6,10 +6,10 @@ public class Mans : ScriptableObject {
 
     [Header("Description")]
     public new string name;
-    public string desc;
     public Sprite artWork;
 
     [Header("MoneyRelated")]
     public int minerIncome;
+    public int attackDamage;
 
 }

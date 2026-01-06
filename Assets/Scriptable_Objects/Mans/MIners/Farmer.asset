@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Farmer
   m_EditorClassIdentifier: 
   name: Farmer
-  desc: Medival Farmer Miner
   artWork: {fileID: 4033355307889638888, guid: 64872dc9fe0d7f2479c4e1e404d46eec, type: 3}
-  Income: 20
-  Cost: 1000
+  minerIncome: 1
+  attackDamage: 0

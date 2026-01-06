@@ -53,7 +53,7 @@ public class UpgradeButton : MonoBehaviour
     {
         switch (upgrade.upgradeType) //Upgrades Based on Type:
         {
-            case UpgradeData.UpgradeButtonType.ManSpawner: minerManager.OnClickMinerButton(); break;
+            case UpgradeData.UpgradeButtonType.UnitSpawner: minerManager.SpawnUnit(upgrade.unitGroupIndex); break;
             case UpgradeData.UpgradeButtonType.ClickUpgrade: moneyManager.moneyButton.onClickMoneyAddedText += upgrade.valuePerLevel; break;
             case UpgradeData.UpgradeButtonType.Rebirth: rebirthManager.Rebirth(); break;
             case UpgradeData.UpgradeButtonType.Evolve: rebirthManager.Evolve(); break;
@@ -81,7 +81,7 @@ public class UpgradeButton : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        
+
         gameObject.SetActive(true); // visible if unlocked
         nameText.text = upgrade.displayName;
         costText.text = GetCost() + "$";

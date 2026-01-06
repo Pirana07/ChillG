@@ -6,20 +6,19 @@ public class RebirthManager : MonoBehaviour
 
     [Header("Managers")]
     [SerializeField] MoneyManager moneyManager;
-    [SerializeField] UpgradeData[] allUpgrades;
     [SerializeField] MinerManager minerManager;
+    [SerializeField] UpgradeData[] allUpgrades;
     UpgradeButton[] allUpgradeButtons;
 
-    [Header("Evolve")]
+    [Header("Evolve")] 
     public int evolutionIndex = 0;
-    
+
     [Header("Rebirth Settings")]
     public int rebirthCounter = 0;
     public int rebirthMultiplier = 1;
 
     void Awake()
     {
-        //if there is more than one instance then destroy
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -28,8 +27,8 @@ public class RebirthManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        //
-        allUpgradeButtons = GameObject.FindObjectsByType<UpgradeButton>(FindObjectsSortMode.None);
+
+        allUpgradeButtons = FindObjectsByType<UpgradeButton>(FindObjectsSortMode.None);
     }
     public void Rebirth()
     {
@@ -38,34 +37,32 @@ public class RebirthManager : MonoBehaviour
         // Reset money
         moneyManager.currentMoney = 0;
         moneyManager.addedMoney = 1;
-        // Reset upgrades (levels only)
+        // Reset upgrade levels
         foreach (var upgrade in allUpgrades)
             upgrade.currentLevel = 0;
 
+        // Reset units
+        minerManager.ResetAllUnits();
+
+        // Reset evolution
+        evolutionIndex = 0;
+        minerManager.EvolveUnits(evolutionIndex);
+
+        // Refresh UI
         foreach (var btn in allUpgradeButtons)
             btn.RefreshUI();
-
-        //Reset miners
-        minerManager.ResetMiners();
-        ResetEvolve();
     }
-
     public void Evolve()
     {
-            evolutionIndex++;
-            minerManager.ResetMiners(); //Reset miners
-            minerManager.EvolveMan(evolutionIndex);// Update artwork for the new evolution tier
-            allUpgrades[1].currentLevel = 0;
-          foreach (var btn in allUpgradeButtons)
+        evolutionIndex++;
+        minerManager.ResetAllUnits();
+        minerManager.EvolveUnits(evolutionIndex);
+        allUpgrades[1].currentLevel = 0;
+        allUpgrades[4].currentLevel = 0;
+
+
+        foreach (var btn in allUpgradeButtons)
             btn.RefreshUI();
     }
 
-    void ResetEvolve()
-    {
-        evolutionIndex = 0;
-        minerManager.EvolveMan(evolutionIndex);// Update artwork for the new evolution tier
-    }
-
-
 }
-

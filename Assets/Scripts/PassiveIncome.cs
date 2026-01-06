@@ -33,11 +33,12 @@ public class PassiveIncome : MonoBehaviour
 
     public float PassiveIncomeMoney()
     {
-        return MinerIncomeMoney() * rebirthManager.rebirthMultiplier * minerManager.minerCounter;
+        float totalIncome = 0f;
+
+        foreach (var group in minerManager.Groups)
+            totalIncome += group.currentData.minerIncome * group.counter;
+
+        return totalIncome * rebirthManager.rebirthMultiplier;
     }
 
-    float MinerIncomeMoney()
-    {
-        return minerManager.man[rebirthManager.evolutionIndex].minerIncome;
-    }
 }

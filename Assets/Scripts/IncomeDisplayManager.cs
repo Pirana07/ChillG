@@ -37,7 +37,6 @@ public class IncomeDisplayManager : MonoBehaviour
         timePassed += Time.deltaTime;
         if (timePassed > seconds)
         {
-                        Debug.Log("added!ss");
             moneyAddedTextTmp.alpha = 1f;
             timePassed = 0f;
             costDisplay = 0; 
@@ -45,7 +44,6 @@ public class IncomeDisplayManager : MonoBehaviour
         else if (timePassed > 0.45f)
         {
             moneyAddedTextTmp.alpha = 0.7f;
-            
         }
     }
 

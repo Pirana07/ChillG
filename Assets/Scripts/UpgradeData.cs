@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Upgrades", menuName = "Upgrades", order = 0)]
 public class UpgradeData : ScriptableObject
-{ 
+{
     public string displayName;
     public UpgradeButtonType upgradeType;
 
@@ -17,11 +17,12 @@ public class UpgradeData : ScriptableObject
 
     [Tooltip("Upgrade becomes available only after player rebirths.")]//that's a new thing
     public bool unlockAfterRebirth = false;
+    public int unitGroupIndex; // index in MinerManager.groups
 
-     public enum UpgradeButtonType
+    public enum UpgradeButtonType
     {
-        CoinUpgrade, 
-        ManSpawner,
+        CoinUpgrade,
+        UnitSpawner,
         ClickUpgrade,
         Rebirth,
         Evolve
