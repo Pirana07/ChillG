@@ -16,11 +16,6 @@ public class MoneyManager : MonoBehaviour
     public MoneyState currentState;
     public enum MoneyState { MoneyAdded, MoneyDecreased };
 
-    [Header("Rebirth Settings")]
-    public int rebirthCounter = 0;
-    public int rebirthMultiplier = 1;
-
-
     void Awake()
     {
         //if there is more than one instance then destroy

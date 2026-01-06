@@ -25,7 +25,7 @@ public class UpgradeButton : MonoBehaviour
         incomeDisplayManager = IncomeDisplayManager.Instance;
 
         upgrade.currentLevel = 0;
-        upgrade.baseCost *= moneyManager.rebirthCounter + 1;
+        upgrade.baseCost *= rebirthManager.rebirthCounter + 1;
         RefreshUI();
     }
     public void BuyUpgrade()
@@ -62,7 +62,7 @@ public class UpgradeButton : MonoBehaviour
     }
     int GetCost()
     {
-        return upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease * moneyManager.rebirthMultiplier;
+        return upgrade.baseCost + upgrade.currentLevel * upgrade.costIncrease * rebirthManager.rebirthMultiplier;
     }
     void ResetMoneyState()//uses incomeDisplayManager
     {
@@ -75,7 +75,7 @@ public class UpgradeButton : MonoBehaviour
     }
     public void RefreshUI()
     {
-        if (upgrade.unlockAfterRebirth && moneyManager.rebirthCounter == 0)
+        if (upgrade.unlockAfterRebirth && rebirthManager.rebirthCounter == 0)
         {
             // Hide or disable button
             gameObject.SetActive(false);

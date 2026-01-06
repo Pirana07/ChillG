@@ -9,10 +9,13 @@ public class RebirthManager : MonoBehaviour
     [SerializeField] UpgradeData[] allUpgrades;
     [SerializeField] MinerManager minerManager;
     UpgradeButton[] allUpgradeButtons;
-    
+
     [Header("Evolve")]
     public int evolutionIndex = 0;
     
+    [Header("Rebirth Settings")]
+    public int rebirthCounter = 0;
+    public int rebirthMultiplier = 1;
 
     void Awake()
     {
@@ -30,8 +33,8 @@ public class RebirthManager : MonoBehaviour
     }
     public void Rebirth()
     {
-        moneyManager.rebirthCounter++;
-        moneyManager.rebirthMultiplier++;
+        rebirthCounter++;
+        rebirthMultiplier++;
         // Reset money
         moneyManager.currentMoney = 0;
         moneyManager.addedMoney = 1;
@@ -44,6 +47,7 @@ public class RebirthManager : MonoBehaviour
 
         //Reset miners
         minerManager.ResetMiners();
+        ResetEvolve();
     }
 
     public void Evolve()
@@ -56,6 +60,12 @@ public class RebirthManager : MonoBehaviour
             btn.RefreshUI();
     }
 
-    
+    void ResetEvolve()
+    {
+        evolutionIndex = 0;
+        minerManager.EvolveMan(evolutionIndex);// Update artwork for the new evolution tier
+    }
+
+
 }
 
