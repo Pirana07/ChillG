@@ -18,6 +18,6 @@ MonoBehaviour:
   costIncrease: 5
   valuePerLevel: 1
   maxLevel: 3
-  currentLevel: 3
+  currentLevel: 0
   unlockAfterRebirth: 1
   unitGroupIndex: 1
