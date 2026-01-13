@@ -30,7 +30,7 @@ public class IncomeDisplayManager : MonoBehaviour
 
         Instance = this;
     }
-    
+
     private void Update()
     {
         MoneyText();
@@ -39,7 +39,8 @@ public class IncomeDisplayManager : MonoBehaviour
         {
             moneyAddedTextTmp.alpha = 1f;
             timePassed = 0f;
-            costDisplay = 0; 
+            if (moneyManager.currentState == MoneyManager.MoneyState.MoneyAdded)
+                costDisplay = 0;
         }
         else if (timePassed > 0.45f)
         {

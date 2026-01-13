@@ -60,7 +60,6 @@ public class RebirthManager : MonoBehaviour
         allUpgrades[1].currentLevel = 0;
         allUpgrades[4].currentLevel = 0;
 
-
         foreach (var btn in allUpgradeButtons)
             btn.RefreshUI();
     }

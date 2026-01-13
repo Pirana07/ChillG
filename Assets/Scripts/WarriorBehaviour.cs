@@ -5,7 +5,7 @@ public class WarriorBehaviour : MonoBehaviour
 {
     [Header("Managers")]
     [SerializeField] RebirthManager rebirthManager;
-    
+
     [Header("Movement Settings")]
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] float warriorSpeed = 5f;
@@ -71,7 +71,7 @@ public class WarriorBehaviour : MonoBehaviour
             return;
 
         Transform newTarget;
-        do//same targets doesn't repeat >:)
+        do//same target doesn't repeat >:)
         {
             newTarget = patrolPoints[Random.Range(0, patrolPoints.Length)];
         }
