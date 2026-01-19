@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MiningPlace
   - DepositPlace
+  - Enemy
   layers:
   - Default
   - TransparentFX

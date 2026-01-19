@@ -1,82 +1,48 @@
-using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WarriorBehaviour : MonoBehaviour
 {
     [Header("Managers")]
     [SerializeField] RebirthManager rebirthManager;
-
-    [Header("Movement Settings")]
-    [SerializeField] Transform[] patrolPoints;
-    [SerializeField] float warriorSpeed = 5f;
-    [SerializeField] Vector2 waitTimeRange = new Vector2(1f, 3f);
-    Transform currentTarget;
-    public bool warriorIsWaiting;
+    [SerializeField] WarriorMovement warriorMovement;
 
     enum WarriorState
     {
         Idle,
-        Attacking,
+        Chasing,
         Fighting,
-        goingBack,
+        GoingBack,
     }
 
     [Header("warrior Settings")]
     [SerializeField] WarriorState warriorState;
-    [SerializeField] Animator warriorAnim;
 
-    void Start()
-    {
-        PickNewTarget();
-    }
 
     void Update()
     {
         switch (warriorState)
         {
-            case WarriorState.Idle: Patroling(); break;
+            case WarriorState.Idle: warriorMovement.Patroling(); break;
+            case WarriorState.Chasing: warriorMovement.Chasing(); break;
+            case WarriorState.GoingBack: warriorMovement.Patroling(); break;
+
+
         }
     }
 
-    void Patroling()
+    //Enemy triggered Warrior
+    public void AlertTarget(Transform target)
     {
-        if (warriorIsWaiting || currentTarget == null || patrolPoints.Length == 0)
-            return;
-
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, warriorSpeed * Time.deltaTime); //moving
-
-        if (Vector3.Distance(transform.position, currentTarget.position) < 0.1f)//if reached destination
-        {
-            StartCoroutine(WaitAndPickNewTarget());
-        }
+        warriorState = WarriorState.Chasing;
+        warriorMovement.currentTarget = target;
     }
 
-    IEnumerator WaitAndPickNewTarget()
+    //Enemy escaped Warrior
+    public void TargetLost()
     {
-        warriorIsWaiting = true;
-        warriorAnim.SetBool("isMoving", false);
-        yield return new WaitForSeconds(Random.Range(waitTimeRange.x, waitTimeRange.y)); //better than timer thing
-        warriorAnim.SetBool("isMoving", true);
-
-        PickNewTarget();
-        warriorIsWaiting = false;
+        warriorMovement.textBuble.SetActive(true);
+        warriorState = WarriorState.GoingBack; //going to original pos
     }
 
-    /// <summary>
-    /// Picks Random Destination
-    /// </summary>
-    void PickNewTarget()
-    {
-        if (patrolPoints.Length == 0)
-            return;
-
-        Transform newTarget;
-        do//same target doesn't repeat >:)
-        {
-            newTarget = patrolPoints[Random.Range(0, patrolPoints.Length)];
-        }
-        while (newTarget == currentTarget && patrolPoints.Length > 1);
-
-        currentTarget = newTarget;
-    }
 }
