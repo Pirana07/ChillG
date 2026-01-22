@@ -10192,6 +10192,7 @@ GameObject:
   - component: {fileID: 1049533015}
   - component: {fileID: 1049533017}
   - component: {fileID: 1049533018}
+  - component: {fileID: 1049533019}
   m_Layer: 0
   m_Name: Evil
   m_TagString: Enemy
@@ -10338,10 +10339,24 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1049533019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049533014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1ae38e7476bbd49b367230582c6f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  rb: {fileID: 1049533018}
 --- !u!1001 &1050002482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11552,9 +11567,25 @@ PrefabInstance:
       propertyPath: rebirthManager
       value: 
       objectReference: {fileID: 55012524}
+    - target: {fileID: 4054983202287869963, guid: b5c13b732de193d468c51a3ad97254fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5303386178019195621, guid: b5c13b732de193d468c51a3ad97254fd, type: 3}
       propertyPath: m_Name
       value: Warrior (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806505963355060705, guid: b5c13b732de193d468c51a3ad97254fd, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806505963355060705, guid: b5c13b732de193d468c51a3ad97254fd, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806505963355060705, guid: b5c13b732de193d468c51a3ad97254fd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

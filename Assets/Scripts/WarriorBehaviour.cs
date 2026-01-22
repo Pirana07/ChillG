@@ -7,7 +7,7 @@ public class WarriorBehaviour : MonoBehaviour
     [SerializeField] RebirthManager rebirthManager;
     [SerializeField] WarriorMovement warriorMovement;
 
-    enum WarriorState
+    public enum WarriorState
     {
         Idle,
         Chasing,
@@ -16,7 +16,7 @@ public class WarriorBehaviour : MonoBehaviour
     }
 
     [Header("warrior Settings")]
-    [SerializeField] WarriorState warriorState;
+    public WarriorState warriorState;
 
 
     void Update()
@@ -25,9 +25,7 @@ public class WarriorBehaviour : MonoBehaviour
         {
             case WarriorState.Idle: warriorMovement.Patroling(); break;
             case WarriorState.Chasing: warriorMovement.Chasing(); break;
-            case WarriorState.GoingBack: warriorMovement.Patroling(); break;
-
-
+            case WarriorState.GoingBack: warriorMovement.GoingBack(); break;
         }
     }
 
@@ -36,13 +34,18 @@ public class WarriorBehaviour : MonoBehaviour
     {
         warriorState = WarriorState.Chasing;
         warriorMovement.currentTarget = target;
+        warriorMovement.warriorIsWaiting = false;
     }
 
     //Enemy escaped Warrior
     public void TargetLost()
     {
-        warriorMovement.textBuble.SetActive(true);
+        warriorMovement.ShowTextBuble();
         warriorState = WarriorState.GoingBack; //going to original pos
+    }
+    public void BackToIDle()
+    {
+        warriorState = WarriorBehaviour.WarriorState.Idle;
     }
 
 }

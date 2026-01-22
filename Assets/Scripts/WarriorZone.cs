@@ -10,7 +10,6 @@ public class WarriorZone : MonoBehaviour
         if (other.tag == "Enemy")
         {
             warriorBehaviour.AlertTarget(other.transform);
-            Debug.Log("Its here");
         }
     }
     //Enemy Left warrior Zone
@@ -19,8 +18,6 @@ public class WarriorZone : MonoBehaviour
         if (other.tag == "Enemy")
         {
             warriorBehaviour.TargetLost();
-            Debug.Log("Its Gone");
-
         }
 
     }

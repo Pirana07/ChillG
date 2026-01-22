@@ -1,8 +1,11 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WarriorMovement : MonoBehaviour
 {
+    [Header("Manager")]
+    [SerializeField] WarriorBehaviour warriorBehaviour;
     [Header("Movement Settings")]
     [SerializeField] float warriorSpeed = 5f;
     [SerializeField] Vector2 waitTimeRange = new Vector2(1f, 3f);
@@ -12,6 +15,8 @@ public class WarriorMovement : MonoBehaviour
     [Header("Target Settings")]
     [SerializeField] Transform[] patrolPoints;
     public Transform currentTarget;
+    bool isChasingEnemy;
+
     [Header("Detail Settings")]
     public GameObject textBuble;
 
@@ -21,38 +26,68 @@ public class WarriorMovement : MonoBehaviour
         PickNewTarget();
     }
 
+
+    /// <summary>
+    /// Idle Patroling
+    /// </summary>
     public void Patroling()
     {
-        if (warriorIsWaiting || currentTarget == null || patrolPoints.Length == 0)
+        if (warriorIsWaiting || isChasingEnemy || currentTarget == null || patrolPoints.Length == 0)
             return;
 
+        warriorAnim.SetBool("isMoving", true);
         transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, warriorSpeed * Time.deltaTime); //moving
 
         if (Vector3.Distance(transform.position, currentTarget.position) < 0.1f)//if reached destination
         {
+            if (warriorIsWaiting) return;
+
+            warriorIsWaiting = true;
             StartCoroutine(WaitAndPickNewTarget());
         }
     }
+
+    /// <summary>
+    /// Chasing enemy
+    /// </summary>
     public void Chasing()
     {
+        isChasingEnemy = true;
         transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, warriorSpeed * Time.deltaTime); //Chasing
         warriorAnim.SetBool("isMoving", true);
-        if (Vector3.Distance(transform.position, currentTarget.position) < 0.1f)//if reached destination
-            warriorAnim.SetBool("isMoving", false);
-        return;
     }
 
 
+    /// <summary>
+    /// Going Back To Idle
+    /// </summary>
+    public void GoingBack()
+    {
+        isChasingEnemy = false;
+        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[0].position, warriorSpeed * Time.deltaTime); //moving
+        warriorAnim.SetBool("isMoving", true);
+
+        if (Vector3.Distance(transform.position, patrolPoints[0].position) < 0.1f)//if reached destination
+        {
+            StartCoroutine(WaitAndPickNewTarget());
+            warriorBehaviour.BackToIDle();
+        }
+    }
+
+    /// <summary>
+    /// Wait For Patrol
+    /// </summary>
     IEnumerator WaitAndPickNewTarget() //Bug
     {
         warriorIsWaiting = true;
         warriorAnim.SetBool("isMoving", false);
         yield return new WaitForSeconds(Random.Range(waitTimeRange.x, waitTimeRange.y)); //better than timer thing
-        warriorAnim.SetBool("isMoving", true);
-        textBuble.SetActive(false); 
+        if (!isChasingEnemy) //Not to override enemy target
+            PickNewTarget();
 
-        PickNewTarget();
+        warriorAnim.SetBool("isMoving", true);
         warriorIsWaiting = false;
+        textBuble.SetActive(false);
     }
 
     /// <summary>
@@ -71,5 +106,10 @@ public class WarriorMovement : MonoBehaviour
         while (newTarget == currentTarget && patrolPoints.Length > 1);
 
         currentTarget = newTarget;
+    }
+
+    public void ShowTextBuble() //Change
+    {
+        textBuble.SetActive(true);
     }
 }

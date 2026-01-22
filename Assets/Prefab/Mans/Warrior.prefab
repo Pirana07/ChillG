@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d308f0881a7be6449a46874a1eec5d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warriorBehaviour: {fileID: 2715171513921168802}
   warriorSpeed: 3
   waitTimeRange: {x: 1, y: 3}
   warriorIsWaiting: 0
