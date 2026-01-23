@@ -11,7 +11,7 @@ public class WarriorBehaviour : MonoBehaviour
     {
         Idle,
         Chasing,
-        Fighting,
+        // Fighting,
         GoingBack,
     }
 
@@ -25,6 +25,7 @@ public class WarriorBehaviour : MonoBehaviour
         {
             case WarriorState.Idle: warriorMovement.Patroling(); break;
             case WarriorState.Chasing: warriorMovement.Chasing(); break;
+            // case WarriorState.Fighting: Debug.Log("Fighting!"); break;
             case WarriorState.GoingBack: warriorMovement.GoingBack(); break;
         }
     }
@@ -35,17 +36,23 @@ public class WarriorBehaviour : MonoBehaviour
         warriorState = WarriorState.Chasing;
         warriorMovement.currentTarget = target;
         warriorMovement.warriorIsWaiting = false;
+        warriorMovement.ShowTextBuble(false);
     }
 
     //Enemy escaped Warrior
     public void TargetLost()
     {
-        warriorMovement.ShowTextBuble();
+        warriorMovement.ShowTextBuble(true);
         warriorState = WarriorState.GoingBack; //going to original pos
     }
     public void BackToIDle()
     {
         warriorState = WarriorBehaviour.WarriorState.Idle;
     }
+    // public void StartAttack()
+    // {
+    //     warriorState = WarriorBehaviour.WarriorState.Fighting;
+    // }
+
 
 }

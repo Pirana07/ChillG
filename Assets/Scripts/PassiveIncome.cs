@@ -7,9 +7,8 @@ public class PassiveIncome : MonoBehaviour
     MinerManager minerManager;
     RebirthManager rebirthManager;
 
-    [Header("Time Settings")]
-    [Range(0f, 2f)][SerializeField] float seconds = 1f;
-    float timePassed = 0f;
+   [Header("Time Settings")]
+    [SerializeField] CooldownTimer incomeTimer;
 
 
     void Start()
@@ -21,13 +20,14 @@ public class PassiveIncome : MonoBehaviour
 
     private void Update()
     {
-        timePassed += Time.deltaTime;
+        incomeTimer.Tick(Time.deltaTime);
 
-        if (timePassed > seconds)
+        if (incomeTimer.IsReady(0f))
         {
-            moneyManager.currentMoney += PassiveIncomeMoney(); //++money
-            timePassed = 0f;
+            moneyManager.currentMoney += PassiveIncomeMoney();
+            incomeTimer.Reset(1f);
         }
+
         moneyManager.UpdateGoldText(moneyManager.currentMoney, moneyManager.displayMoney);
     }
 

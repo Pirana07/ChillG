@@ -8,6 +8,8 @@ public class IncomeDisplayManager : MonoBehaviour
     [Header("Managers")]
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] PassiveIncome passiveIncome;
+    [SerializeField] CooldownTimer displayTimer;
+
 
     [Header("In(out)Come Settings")]
     // [SerializeField] GameObject moneyAddedText;
@@ -34,15 +36,15 @@ public class IncomeDisplayManager : MonoBehaviour
     private void Update()
     {
         MoneyText();
-        timePassed += Time.deltaTime;
-        if (timePassed > seconds)
+        displayTimer.Tick(Time.deltaTime);
+        if (displayTimer.IsReady(0))
         {
+            displayTimer.Reset(0.99f);
             moneyAddedTextTmp.alpha = 1f;
-            timePassed = 0f;
             if (moneyManager.currentState == MoneyManager.MoneyState.MoneyAdded)
                 costDisplay = 0;
         }
-        else if (timePassed > 0.45f)
+        else if (displayTimer.IsReady(0.55f))
         {
             moneyAddedTextTmp.alpha = 0.7f;
         }
