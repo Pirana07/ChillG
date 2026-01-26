@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WarriorBehaviour : MonoBehaviour
@@ -18,6 +19,9 @@ public class WarriorBehaviour : MonoBehaviour
     [Header("warrior Settings")]
     public WarriorState warriorState;
 
+    List<Transform> enemiesInZone = new List<Transform>();
+    Transform currentEnemy;
+
 
     void Update()
     {
@@ -30,25 +34,56 @@ public class WarriorBehaviour : MonoBehaviour
         }
     }
 
-    //Enemy triggered Warrior
+    //enemy entered zone
     public void AlertTarget(Transform target)
     {
+        if (!enemiesInZone.Contains(target))
+            enemiesInZone.Add(target);
+
+        // if already have a target, ignore new enemy
+        if (currentEnemy != null)
+            return;
+
+        // lock this enemy
+        currentEnemy = target;
+
         warriorState = WarriorState.Chasing;
-        warriorMovement.currentTarget = target;
+        warriorMovement.currentTarget = currentEnemy;
         warriorMovement.warriorIsWaiting = false;
         warriorMovement.ShowTextBuble(false);
     }
 
-    //Enemy escaped Warrior
-    public void TargetLost()
+    //enemy left zone
+    public void TargetLost(Transform target)
     {
-        warriorMovement.ShowTextBuble(true);
-        warriorState = WarriorState.GoingBack; //going to original pos
+        enemiesInZone.Remove(target);
+
+        //only react if the lost target was the current locked enemy
+        if (target != currentEnemy)
+            return;
+
+        currentEnemy = null;
+
+        if (enemiesInZone.Count > 0)
+        {
+            // take next enemy 
+            currentEnemy = enemiesInZone[0];
+            warriorMovement.currentTarget = currentEnemy;
+            warriorState = WarriorState.Chasing;
+        }
+        else
+        {
+            //nomore enemies
+            warriorMovement.ShowTextBuble(true);
+            warriorState = WarriorState.GoingBack;
+        }
     }
+
     public void BackToIDle()
     {
-        warriorState = WarriorBehaviour.WarriorState.Idle;
+        warriorState = WarriorState.Idle;
     }
+
     // public void StartAttack()
     // {
     //     warriorState = WarriorBehaviour.WarriorState.Fighting;

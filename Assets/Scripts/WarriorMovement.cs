@@ -52,16 +52,31 @@ public class WarriorMovement : MonoBehaviour
     /// </summary>
     public void Chasing()
     {
+        if (currentTarget == null)
+            return;
+
         isChasingEnemy = true;
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, warriorSpeed * Time.deltaTime); //Chasing
         warriorAnim.SetBool("isMoving", true);
-        // if(Vector3.Distance(transform.position, currentTarget.position) < 0.1f)//if reached destination
-        //     warriorBehaviour.StartAttack();
-        
+
+        //move toward the current target
+        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, warriorSpeed * Time.deltaTime);
+
+        // check if close enough to start attack
+        if (Vector3.Distance(transform.position, currentTarget.position) < 0.5f) 
+        {
+            //attack this enemy
+            EnemyBehaviour enemy = currentTarget.GetComponent<EnemyBehaviour>();
+            if (enemy != null)
+            {
+                WarriorFight fight = GetComponent<WarriorFight>();
+                fight.SetEnemy(enemy);
+            }
+        }
     }
 
 
-    /// <summary>
+
+    /// <summary> 
     /// Going Back To Idle
     /// </summary>
     public void GoingBack()
@@ -90,7 +105,7 @@ public class WarriorMovement : MonoBehaviour
 
         warriorAnim.SetBool("isMoving", true);
         warriorIsWaiting = false;
-         ShowTextBuble(false);
+        ShowTextBuble(false);
     }
 
     /// <summary>

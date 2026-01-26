@@ -4,8 +4,15 @@ public class WarriorFight : MonoBehaviour
 {
     [SerializeField] float attackDamage = 1f;
     [SerializeField] CooldownTimer attackTimer;
+    [SerializeField] Animator warriorAnim;
 
     EnemyBehaviour currentEnemy;
+    WarriorBehaviour warriorBehaviour;
+
+    void Awake()
+    {
+        warriorBehaviour = GetComponentInParent<WarriorBehaviour>();
+    }
 
     void Update()
     {
@@ -23,22 +30,28 @@ public class WarriorFight : MonoBehaviour
 
     void Attack()
     {
+        if (currentEnemy == null)
+            return;
+
         currentEnemy.TakeDamage(attackDamage);
     }
 
     //
-    void OnTriggerEnter2D(Collider2D other)
+    public void SetEnemy(EnemyBehaviour enemy)
     {
-        if (other.CompareTag("Enemy"))
+        if (currentEnemy == null)
         {
-            currentEnemy = other.GetComponent<EnemyBehaviour>();
+            currentEnemy = enemy;
             attackTimer.ForceReady();
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    public void EnemyLost()
     {
-        if (other.CompareTag("Enemy"))
+        if (currentEnemy != null)
+        {
+            warriorBehaviour.TargetLost(currentEnemy.transform);
             currentEnemy = null;
+        }
     }
 }
