@@ -105,7 +105,7 @@ public class WarriorMovement : MonoBehaviour
 
         warriorAnim.SetBool("isMoving", true);
         warriorIsWaiting = false;
-        ShowTextBuble(false);
+        ShowTextBuble(false, ":Error:");
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ public class WarriorMovement : MonoBehaviour
         currentTarget = newTarget;
     }
 
-    public void ShowTextBuble(bool shouldItShow) //Change
+    public void ShowTextBuble(bool shouldItShow, string bubleText) //Change
     {
         textBuble.SetActive(shouldItShow);
     }

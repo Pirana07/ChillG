@@ -17,7 +17,7 @@ public class IncomeDisplayManager : MonoBehaviour
     public int costDisplay = 0;
 
     [Header("Display Settings")]
-    [Range(0f, 1f)][SerializeField] float seconds = 0.99f;
+    // [Range(0f, 1f)][SerializeField] float seconds = 0.99f;
     [SerializeField] TMP_Text moneyAddedTextTmp;
     [SerializeField] TMP_Text moneyDecreasedTextTmp;
     float timePassed;

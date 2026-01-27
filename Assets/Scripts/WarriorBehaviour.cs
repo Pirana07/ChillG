@@ -50,7 +50,7 @@ public class WarriorBehaviour : MonoBehaviour
         warriorState = WarriorState.Chasing;
         warriorMovement.currentTarget = currentEnemy;
         warriorMovement.warriorIsWaiting = false;
-        warriorMovement.ShowTextBuble(false);
+        warriorMovement.ShowTextBuble(false, ":Error:");
     }
 
     //enemy left zone
@@ -74,7 +74,7 @@ public class WarriorBehaviour : MonoBehaviour
         else
         {
             //nomore enemies
-            warriorMovement.ShowTextBuble(true);
+            warriorMovement.ShowTextBuble(true, "I Lost it!");
             warriorState = WarriorState.GoingBack;
         }
     }
