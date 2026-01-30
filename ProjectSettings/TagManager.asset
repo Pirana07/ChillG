@@ -50,6 +50,9 @@ TagManager:
   - name: Actor
     uniqueID: 4103742315
     locked: 0
+  - name: Front
+    uniqueID: 1586054363
+    locked: 0
   - name: UI
     uniqueID: 3551993337
     locked: 0
