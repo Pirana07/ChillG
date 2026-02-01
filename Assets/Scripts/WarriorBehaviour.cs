@@ -20,7 +20,7 @@ public class WarriorBehaviour : MonoBehaviour
     public WarriorState warriorState;
 
     List<Transform> enemiesInZone = new List<Transform>();
-    Transform currentEnemy;
+    public Transform currentEnemy;
 
 
     void Update()
@@ -83,11 +83,6 @@ public class WarriorBehaviour : MonoBehaviour
     {
         warriorState = WarriorState.Idle;
     }
-
-    // public void StartAttack()
-    // {
-    //     warriorState = WarriorBehaviour.WarriorState.Fighting;
-    // }
 
 
 }

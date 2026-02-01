@@ -16,7 +16,7 @@ public class WarriorFight : MonoBehaviour
 
     void Update()
     {
-        if (currentEnemy == null)
+        if (warriorBehaviour.currentEnemy == null)
             return;
 
         // Combat Logic(time based)

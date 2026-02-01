@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] float maxHP = 10f;
     [SerializeField] float currentHP;
+    public event Action OnEnemyDied;
+
 
     void Awake()
     {
@@ -22,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Die()
     {
+        OnEnemyDied?.Invoke();
         Destroy(gameObject);
     }
 }
